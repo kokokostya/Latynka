@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
     resultPlaceholder.classList.remove("d-none");
     resultText.classList.add("d-none");
   }
+
+  // Decorations: custom input
+  function customTextExpected() {
+    document.querySelectorAll("#sourcePreset .nav-link").forEach( (link) => ( link.classList.remove("active")));
+    document.querySelector("#sourcePreset .nav-link").classList.add("active");
+  }
   
   textArea.addEventListener("input", function(e) { 
     // Text area auto height
@@ -39,12 +45,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
     } else {
       resultText.innerHTML = toLatin(textArea.value, document.querySelector("#latinType .active").id);
       textEntered();
+      customTextExpected();
     }
   });
 
   // Text area reset
   resetIcon.addEventListener("click", function(e) {   
     noTextEntered();
+    customTextExpected();
     e.preventDefault();
   });
 
@@ -67,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     setTimeout(function() {
       msg.remove();
     }, 3000);
-    
+
     e.preventDefault();
   });
 
