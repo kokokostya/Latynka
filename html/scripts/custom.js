@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Page load actions
   document.getElementById("source").focus();
   populateAlphabet();
+  translateInput()
 
   // Populate alphabet table
   function populateAlphabet() {

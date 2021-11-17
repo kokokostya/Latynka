@@ -140,6 +140,10 @@ table {
 }
 
 @media (max-width: 992px) {
+  .logo {
+    transform: scale(0.85);
+  }
+
   #sourceContainer {
     .icon {
       padding: 0;
@@ -162,7 +166,7 @@ table {
 
   #destinationContainer {
     padding: 0;
-    
+
     div {
       border-radius: 0;
       min-height: 8rem;

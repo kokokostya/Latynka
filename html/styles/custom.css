@@ -163,6 +163,10 @@ table td {
 }
 
 @media (max-width: 992px) {
+  .logo {
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
+  }
   #sourceContainer .icon {
     padding: 0;
     -webkit-box-shadow: none;
