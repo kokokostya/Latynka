@@ -103,6 +103,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
   
   textArea.addEventListener("input", inputUpdated);
+  textArea.addEventListener("keypress", function(e) {
+    document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
+    document.getElementById("custom").classList.add("active");
+  });
 
   // Text area reset
   resetIcon.addEventListener("click", function(e) {  
