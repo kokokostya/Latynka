@@ -50,22 +50,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
     for (let i = 1; i <= 33; i++) {
       let equivalentStr = "";
       let equivalent = LATIN_CONFIGS[document.querySelector("#latinType .active").id]["dict"][LETTER_INDEX[i]];
-
-      console.log(equivalent)
       
-      if (equivalent.constructor === Array) {
-        let uniqueEquivalents = equivalent.filter(function(item, pos) {
-          return equivalent.indexOf(item) == pos;
-        })
+      if (equivalent.constructor === Array) { 
+        let uniqueEquivalents = equivalent.flat(1).filter(function(item, pos) {
+          return equivalent.flat(1).indexOf(item) == pos;
+        });
         uniqueEquivalents.forEach( (variant) => {
-          equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
+          if (variant) equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
         });
         equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
       } else {
-        equivalentStr = equivalent//.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
-      }
-
-      
+        equivalentStr = equivalent.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
+      }   
 
       document.getElementById("letter-" + i).innerHTML = (equivalentStr.trim().length) ? equivalentStr : "—";
     }
