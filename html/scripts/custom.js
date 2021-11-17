@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         let uniqueEquivalents = equivalent.flat(1).filter(function(item, pos) {
           return equivalent.flat(1).indexOf(item) == pos;
         });
-        uniqueEquivalents.forEach( (variant) => {
+        uniqueEquivalents.forEach( function(variant) {
           if (variant) equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
         });
         equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.add("d-none");
 
       // Reset template tabs
-      document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
+      document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active") ) );
       document.getElementById("custom").classList.add("active");
     // Not empty
     } else {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   
   textArea.addEventListener("input", inputUpdated);
   textArea.addEventListener("keypress", function(e) {
-    document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
+    document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active") ));
     document.getElementById("custom").classList.add("active");
   });
 
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   });
 
   // Tab selection
-  document.querySelectorAll(".nav .nav-link").forEach( (link) => {
+  document.querySelectorAll(".nav .nav-link").forEach( function(link) {
     link.addEventListener("click", function(e) {   
       this.closest(".nav").querySelectorAll(".nav-link").forEach( (sibling) => ( sibling.classList.remove("active")));
       this.classList.add("active");
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         inputUpdated();
       // Selecting latin type
       } else {
-        document.querySelectorAll("#desc .tab").forEach( (tab) => { tab.classList.remove("active"); });
+        document.querySelectorAll("#desc .tab").forEach( function(tab) { tab.classList.remove("active"); });
         document.getElementById(this.id + "-desc").classList.add("active");
         populateAlphabet();
         translateInput();
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   });
 
   // Tab scroll behavior
-  document.querySelectorAll(".h-scroll-container").forEach( (scrollContainer) => {
+  document.querySelectorAll(".h-scroll-container").forEach( function(scrollContainer) {
     let containerWidth = scrollContainer.clientWidth;
     let selectedElementPositionLeft = scrollContainer.querySelector(".active").getBoundingClientRect().left;
     let selectedElementWidth = scrollContainer.querySelector(".active").clientWidth;
