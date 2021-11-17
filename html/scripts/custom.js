@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   resetIcon.addEventListener("click", function(e) {   
     noTextEntered();
     customTextExpected();
+    document.getElementById("source").focus();
     e.preventDefault();
   });
 

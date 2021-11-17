@@ -1,0 +1,3 @@
+[submodule "t-literator"]
+	path = t-literator
+	url = https://github.com/shevchenkoartem/t-literator
