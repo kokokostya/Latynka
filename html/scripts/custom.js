@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.add("d-none");
 
       // Reset template tabs
-      document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active") ) );
+      document.querySelectorAll("#sourceTemplate .nav-link").forEach((link) => (link.classList.remove("active")));
       document.getElementById("custom").classList.add("active");
     // Not empty
     } else {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   
   textArea.addEventListener("input", inputUpdated);
   textArea.addEventListener("keypress", function(e) {
-    document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active") ));
+    document.querySelectorAll("#sourceTemplate .nav-link").forEach((link) => (link.classList.remove("active")));
     document.getElementById("custom").classList.add("active");
   });
 
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Tab selection
   document.querySelectorAll(".nav .nav-link").forEach( function(link) {
     link.addEventListener("click", function(e) {   
-      this.closest(".nav").querySelectorAll(".nav-link").forEach( (sibling) => ( sibling.classList.remove("active")));
+      this.closest(".nav").querySelectorAll(".nav-link").forEach((sibling) => (sibling.classList.remove("active")));
       this.classList.add("active");
 
       // Selecting source template
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         inputUpdated();
       // Selecting latin type
       } else {
-        document.querySelectorAll("#desc .tab").forEach( function(tab) { tab.classList.remove("active"); });
+        document.querySelectorAll("#desc .tab").forEach((tab) => (tab.classList.remove("active")));
         document.getElementById(this.id + "-desc").classList.add("active");
         populateAlphabet();
         translateInput();
