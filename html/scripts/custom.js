@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.remove("d-none");
     }
 
-    textArea.style.height = "";
+    textArea.style.height = "auto";
     textArea.style.height = textArea.scrollHeight + "px" ;
 
     translateInput();
@@ -169,8 +169,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Tab scroll behavior
   document.querySelectorAll(".h-scroll-container").forEach( function(scrollContainer) {
     let containerWidth = scrollContainer.clientWidth;
-    let selectedElementPositionLeft = scrollContainer.querySelector(".active").getBoundingClientRect().left;
-    let selectedElementWidth = scrollContainer.querySelector(".active").clientWidth;
     let lastElementPositionLeft = scrollContainer.querySelector("ul li:last-child").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left;
     let lastElementWidth = scrollContainer.querySelector("ul li:last-child").clientWidth;
 
