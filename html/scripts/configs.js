@@ -1,4 +1,4 @@
-const latinTypes = {
+const LATIN_TYPES = {
   "ukr-lat-jireckivka-1859": {
     "hasVowelBeModifiedInsteadOfConsonantWhenSofting": false,
 

@@ -10,9 +10,45 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Populate alphabet table
   function populateAlphabet(latinType) {
+    const letterIndex = {
+      1 : "а",
+      2 : "б",
+      3 : "в",
+      4 : "г",
+      5 : "ґ",
+      6 : "д",
+      7 : "е",
+      8 : "є",
+      9 : "ж",
+      10 : "з",
+      11 : "и",
+      12 : "і",
+      13 : "ї",
+      14 : "й",
+      15 : "к",
+      16 : "л",
+      17 : "м",
+      18 : "н",
+      19 : "о",
+      20 : "п",
+      21 : "р",
+      22 : "с",
+      23 : "т",
+      24 : "у",
+      25 : "ф",
+      26 : "х",
+      27 : "ц",
+      28 : "ч",
+      29 : "ш",
+      30 : "щ",
+      31 : "ь",
+      32 : "ю",
+      33 : "я"
+    }
+
     for (let i = 1; i <= 33; i++) {
       let equivalentStr = "";
-      let equivalent = latinTypes[latinType]["dict"][letterIndex[i]];
+      let equivalent = LATIN_TYPES[latinType]["dict"][letterIndex[i]];
 
       if (Array.isArray(equivalent)) {
         let uniqueEquivalents = equivalent.filter(function(item, pos) {
@@ -105,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
       // Selecting source template
       if (this.closest("#sourceTemplate")) {
-        document.getElementById("source").value = sourceTemplates[link.id];
+        document.getElementById("source").value = SOURCE_TEMPLATES[link.id];
         inputUpdated();
       // Selecting latin type
       } else {
@@ -149,39 +185,3 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
   });
 });
-
-const letterIndex = {
-  1 : "а",
-  2 : "б",
-  3 : "в",
-  4 : "г",
-  5 : "ґ",
-  6 : "д",
-  7 : "е",
-  8 : "є",
-  9 : "ж",
-  10 : "з",
-  11 : "и",
-  12 : "і",
-  13 : "ї",
-  14 : "й",
-  15 : "к",
-  16 : "л",
-  17 : "м",
-  18 : "н",
-  19 : "о",
-  20 : "п",
-  21 : "р",
-  22 : "с",
-  23 : "т",
-  24 : "у",
-  25 : "ф",
-  26 : "х",
-  27 : "ц",
-  28 : "ч",
-  29 : "ш",
-  30 : "щ",
-  31 : "ь",
-  32 : "ю",
-  33 : "я"
-}
