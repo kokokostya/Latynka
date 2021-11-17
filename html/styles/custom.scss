@@ -37,6 +37,16 @@ table {
   background-color: #E7EBF8;
 }
 
+.tab-group {
+  .tab {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
 .icon {
   display: inline-block;
   height: 2.5rem;

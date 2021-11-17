@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
 
+  document.getElementById("source").focus();
+
   // Text transform
   function toLatin(sourceText, latinType) {
     return sourceText.toUpperCase();
@@ -84,6 +86,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
     link.addEventListener("click", function(e) {   
       link.closest(".nav").querySelectorAll(".nav-link").forEach( (sibling) => ( sibling.classList.remove("active")));
       link.classList.add("active");
+
+      if (link.closest("#latinType")) {
+        document.querySelectorAll("#desc .tab").forEach( (tab) => { tab.classList.remove("active"); });
+        document.getElementById(link.id + "-desc").classList.add("active");
+      }
       e.preventDefault();
     });
   });

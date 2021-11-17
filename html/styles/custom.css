@@ -38,6 +38,14 @@ table td {
   background-color: #E7EBF8;
 }
 
+.tab-group .tab {
+  display: none;
+}
+
+.tab-group .tab.active {
+  display: block;
+}
+
 .icon {
   display: inline-block;
   height: 2.5rem;
