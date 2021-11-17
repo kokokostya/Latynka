@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     let lastElementPositionLeft = scrollContainer.querySelector("ul li:last-child").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left;
     let lastElementWidth = scrollContainer.querySelector("ul li:last-child").clientWidth;
 
-    // Fade out edges on dates scroll
+    // Fade out edges on tab scroll
     scrollContainer.addEventListener("scroll", function(e) {
       let scrollOffset = scrollContainer.querySelector(".h-scroll-content").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left;
       if (scrollOffset < 0) {
@@ -182,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
       } else {
         this.closest(".h-scroll").querySelector(".fadeout-left").classList.add("d-none");
       }
-
       let scrolledTo = -(scrollOffset - containerWidth);
       let lastElementEdge = lastElementPositionLeft + lastElementWidth - 10; // Removing extra for confidence
       if (scrolledTo < lastElementEdge) {
@@ -191,10 +190,5 @@ document.addEventListener("DOMContentLoaded", function(e) {
         this.closest(".h-scroll").querySelector(".fadeout-right").classList.add("d-none");
       }
     });
-
-    // Initial check
-    if (scrollContainer.querySelector(".h-scroll-content").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left >= 0) {
-      scrollContainer.closest(".h-scroll").querySelector(".fadeout-left").classList.add("d-none");
-    }
   });
 });
