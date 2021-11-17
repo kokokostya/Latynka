@@ -8,6 +8,16 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Auto focus on page load
   document.getElementById("source").focus();
 
+  // Populate alphabet table
+  function populateAlphabet(latinType) {
+    for (let i = 1; i <= 33; i++) {
+      document.getElementById("letter-" + i).innerHTML = latinTypes[latinType]["dict"][letterIndex[i]] || "—";
+    }
+  }
+
+  // Populate alphabet table on page load
+  populateAlphabet(document.querySelector("#latinType .active").id);
+
   // Text transform
   function toLatin(sourceText, latinType) {
     return sourceText.toUpperCase();
@@ -22,8 +32,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
       copyIcon.classList.add("d-none");
       resultPlaceholder.classList.remove("d-none");
       resultText.classList.add("d-none");
+
+      // Reset template tabs
       document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
-      document.querySelector("#sourceTemplate .nav-link").classList.add("active");
+      document.getElementById("custom").classList.add("active");
     } else {
       resetIcon.classList.remove("d-none");
       copyIcon.classList.remove("d-none");
@@ -58,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     document.execCommand("copy");
     document.body.removeChild(el);
 
+    // Render message
     let msg = document.createElement("div");
     msg.classList.add("alert", "alert-success", "small");
     msg.innerHTML = "Скопійовано в буфер";
@@ -72,15 +85,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Tab selection
   document.querySelectorAll(".nav .nav-link").forEach( (link) => {
     link.addEventListener("click", function(e) {   
-      link.closest(".nav").querySelectorAll(".nav-link").forEach( (sibling) => ( sibling.classList.remove("active")));
-      link.classList.add("active");
+      this.closest(".nav").querySelectorAll(".nav-link").forEach( (sibling) => ( sibling.classList.remove("active")));
+      this.classList.add("active");
 
-      if (link.closest("#sourceTemplate")) {
+      // Selecting source template
+      if (this.closest("#sourceTemplate")) {
         document.getElementById("source").value = sourceTemplates[link.id];
         inputUpdated();
+      // Selecting latin type
       } else {
         document.querySelectorAll("#desc .tab").forEach( (tab) => { tab.classList.remove("active"); });
-        document.getElementById(link.id + "-desc").classList.add("active");
+        document.getElementById(this.id + "-desc").classList.add("active");
+        populateAlphabet(this.id);
       }
       e.preventDefault();
     });
@@ -118,3 +134,39 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
   });
 });
+
+const letterIndex = {
+  1 : "а",
+  2 : "б",
+  3 : "в",
+  4 : "г",
+  5 : "ґ",
+  6 : "д",
+  7 : "е",
+  8 : "є",
+  9 : "ж",
+  10 : "з",
+  11 : "и",
+  12 : "і",
+  13 : "ї",
+  14 : "й",
+  15 : "к",
+  16 : "л",
+  17 : "м",
+  18 : "н",
+  19 : "о",
+  20 : "п",
+  21 : "р",
+  22 : "с",
+  23 : "т",
+  24 : "у",
+  25 : "ф",
+  26 : "х",
+  27 : "ц",
+  28 : "ч",
+  29 : "ш",
+  30 : "щ",
+  31 : "ь",
+  32 : "ю",
+  33 : "я"
+}
