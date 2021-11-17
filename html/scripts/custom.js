@@ -5,12 +5,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
 
-  // Auto focus on page load
+  // Page load actions
   document.getElementById("source").focus();
+  populateAlphabet();
 
   // Populate alphabet table
-  function populateAlphabet(latinType) {
-    const letterIndex = {
+  function populateAlphabet() {
+    const LETTER_INDEX = {
       1 : "а",
       2 : "б",
       3 : "в",
@@ -48,9 +49,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     for (let i = 1; i <= 33; i++) {
       let equivalentStr = "";
-      let equivalent = LATIN_TYPES[latinType]["dict"][letterIndex[i]];
+      let equivalent = LATIN_CONFIGS[document.querySelector("#latinType .active").id]["dict"][LETTER_INDEX[i]];
 
-      if (Array.isArray(equivalent)) {
+      console.log(equivalent)
+      
+      if (equivalent.constructor === Array) {
         let uniqueEquivalents = equivalent.filter(function(item, pos) {
           return equivalent.indexOf(item) == pos;
         })
@@ -59,23 +62,25 @@ document.addEventListener("DOMContentLoaded", function(e) {
         });
         equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
       } else {
-        equivalentStr += equivalent.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
+        equivalentStr = equivalent//.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
       }
+
+      
 
       document.getElementById("letter-" + i).innerHTML = (equivalentStr.trim().length) ? equivalentStr : "—";
     }
   }
 
-  // Populate alphabet table on page load
-  populateAlphabet(document.querySelector("#latinType .active").id);
-
-  // Text transform
-  function toLatin(sourceText, latinType) {
-    return sourceText.toUpperCase();
+  // Translate input
+  function translateInput() {
+    let t = new Transliterator(new ConfigReader());
+    t.useConfig(document.querySelector("#latinType .active").id);
+    resultText.innerHTML = t.transliterate(textArea.value);
   }
 
   // Respond to input
   function inputUpdated() {
+    // Empty
     if (!textArea.value.trim().length) {
       textArea.value = "";
       textArea.style.height = "0px";
@@ -87,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       // Reset template tabs
       document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
       document.getElementById("custom").classList.add("active");
+    // Not empty
     } else {
       resetIcon.classList.remove("d-none");
       copyIcon.classList.remove("d-none");
@@ -96,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     textArea.style.height = "";
     textArea.style.height = textArea.scrollHeight + "px" ;
-    resultText.innerHTML = toLatin(textArea.value, document.querySelector("#latinType .active").id);
+
+    translateInput();
   }
   
   textArea.addEventListener("input", inputUpdated);
@@ -147,7 +154,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
       } else {
         document.querySelectorAll("#desc .tab").forEach( (tab) => { tab.classList.remove("active"); });
         document.getElementById(this.id + "-desc").classList.add("active");
-        populateAlphabet(this.id);
+        populateAlphabet();
+        translateInput();
       }
       e.preventDefault();
     });

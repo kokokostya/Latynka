@@ -1,9 +1,8 @@
-const LATIN_TYPES = {
+const LATIN_CONFIGS = {
   "ukr-lat-jireckivka-1859": {
     "hasVowelBeModifiedInsteadOfConsonantWhenSofting": false,
 
-    "beforeFixDict": {
-    },
+    "beforeFixDict": {},
 
     "dict": {
         "и": "y",
