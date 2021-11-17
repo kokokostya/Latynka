@@ -11,7 +11,22 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Populate alphabet table
   function populateAlphabet(latinType) {
     for (let i = 1; i <= 33; i++) {
-      document.getElementById("letter-" + i).innerHTML = latinTypes[latinType]["dict"][letterIndex[i]] || "—";
+      let equivalentStr = "";
+      let equivalent = latinTypes[latinType]["dict"][letterIndex[i]];
+
+      if (Array.isArray(equivalent)) {
+        let uniqueEquivalents = equivalent.filter(function(item, pos) {
+          return equivalent.indexOf(item) == pos;
+        })
+        uniqueEquivalents.forEach( (variant) => {
+          equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
+        });
+        equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
+      } else {
+        equivalentStr += equivalent.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
+      }
+
+      document.getElementById("letter-" + i).innerHTML = (equivalentStr.trim().length) ? equivalentStr : "—";
     }
   }
 
