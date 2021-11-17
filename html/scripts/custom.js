@@ -32,24 +32,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Decorations: custom input
   function customTextExpected() {
-    document.querySelectorAll("#sourcePreset .nav-link").forEach( (link) => ( link.classList.remove("active")));
-    document.querySelector("#sourcePreset .nav-link").classList.add("active");
+    document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
+    document.querySelector("#sourceTemplate .nav-link").classList.add("active");
   }
-  
-  textArea.addEventListener("input", function(e) { 
-    // Text area auto height
-    this.style.height = "";
-    this.style.height = this.scrollHeight + "px" ;
 
-    // Input processing
-    if (!this.value.trim().length) {
+  // Respond to input
+  function inputUpdated() {
+    if (!textArea.value.trim().length) {
       noTextEntered();
     } else {
-      resultText.innerHTML = toLatin(textArea.value, document.querySelector("#latinType .active").id);
       textEntered();
-      customTextExpected();
     }
-  });
+    textArea.style.height = "";
+    textArea.style.height = textArea.scrollHeight + "px" ;
+    resultText.innerHTML = toLatin(textArea.value, document.querySelector("#latinType .active").id);
+  }
+  
+  // Textarea input processing
+  textArea.addEventListener("input", inputUpdated);
 
   // Text area reset
   resetIcon.addEventListener("click", function(e) {   
@@ -88,7 +88,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
       link.closest(".nav").querySelectorAll(".nav-link").forEach( (sibling) => ( sibling.classList.remove("active")));
       link.classList.add("active");
 
-      if (link.closest("#latinType")) {
+      if (link.closest("#sourceTemplate")) {
+        document.getElementById("source").value = sourceTemplates[link.id];
+        inputUpdated();
+      } else {
         document.querySelectorAll("#desc .tab").forEach( (tab) => { tab.classList.remove("active"); });
         document.getElementById(link.id + "-desc").classList.add("active");
       }
