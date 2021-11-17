@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Page load actions
   document.getElementById("source").focus();
   populateAlphabet();
-  translateInput()
+  translateInput();
 
   // Populate alphabet table
   function populateAlphabet() {
@@ -72,8 +72,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Translate input
   function translateInput() {   
     t.useConfig(document.querySelector("#latinType .active").id);
-    resultText.innerHTML = t.transliterate(textArea.value);
-    resultPlaceholder.innerHTML = t.transliterate(textArea.placeholder);
+    if (textArea.value.trim().length) {
+      resultText.innerHTML = t.transliterate(textArea.value);
+    } else {
+      resultPlaceholder.innerHTML = t.transliterate(textArea.placeholder);
+    }
   }
 
   // Respond to input
