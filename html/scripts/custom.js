@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resultText = document.getElementById("destination");
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
+  let t = new Transliterator(new ConfigReader());
 
   // Page load actions
   document.getElementById("source").focus();
@@ -68,10 +69,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
 
   // Translate input
-  function translateInput() {
-    let t = new Transliterator(new ConfigReader());
+  function translateInput() {   
     t.useConfig(document.querySelector("#latinType .active").id);
     resultText.innerHTML = t.transliterate(textArea.value);
+    resultPlaceholder.innerHTML = t.transliterate(textArea.placeholder);
   }
 
   // Respond to input
