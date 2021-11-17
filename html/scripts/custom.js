@@ -5,56 +5,43 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
 
+  // Auto focus on page load
   document.getElementById("source").focus();
 
   // Text transform
   function toLatin(sourceText, latinType) {
     return sourceText.toUpperCase();
   }
-  
-  // Decorations: no text entered
-  function textEntered() {
-    resetIcon.classList.remove("d-none");
-    copyIcon.classList.remove("d-none");
-    resultPlaceholder.classList.add("d-none");
-    resultText.classList.remove("d-none");
-  }
-
-  // Decorations: some text entered
-  function noTextEntered() {
-    textArea.value = "";
-    textArea.style.height = "0px";
-    resetIcon.classList.add("d-none");
-    copyIcon.classList.add("d-none");
-    resultPlaceholder.classList.remove("d-none");
-    resultText.classList.add("d-none");
-  }
-
-  // Decorations: custom input
-  function customTextExpected() {
-    document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
-    document.querySelector("#sourceTemplate .nav-link").classList.add("active");
-  }
 
   // Respond to input
   function inputUpdated() {
     if (!textArea.value.trim().length) {
-      noTextEntered();
+      textArea.value = "";
+      textArea.style.height = "0px";
+      resetIcon.classList.add("d-none");
+      copyIcon.classList.add("d-none");
+      resultPlaceholder.classList.remove("d-none");
+      resultText.classList.add("d-none");
+      document.querySelectorAll("#sourceTemplate .nav-link").forEach( (link) => ( link.classList.remove("active")));
+      document.querySelector("#sourceTemplate .nav-link").classList.add("active");
     } else {
-      textEntered();
+      resetIcon.classList.remove("d-none");
+      copyIcon.classList.remove("d-none");
+      resultPlaceholder.classList.add("d-none");
+      resultText.classList.remove("d-none");
     }
+
     textArea.style.height = "";
     textArea.style.height = textArea.scrollHeight + "px" ;
     resultText.innerHTML = toLatin(textArea.value, document.querySelector("#latinType .active").id);
   }
   
-  // Textarea input processing
   textArea.addEventListener("input", inputUpdated);
 
   // Text area reset
-  resetIcon.addEventListener("click", function(e) {   
-    noTextEntered();
-    customTextExpected();
+  resetIcon.addEventListener("click", function(e) {  
+    textArea.value = ""; 
+    inputUpdated();
     document.getElementById("source").focus();
     e.preventDefault();
   });
