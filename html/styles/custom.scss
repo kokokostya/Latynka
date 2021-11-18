@@ -66,12 +66,12 @@ table {
     top: -.5rem;
     right: 0rem;
   
-    &:hover {
+    &:hover, &:active {
       box-shadow: 0 3px 10px #c6cdf0;
     }
   
     &:active {
-      box-shadow: 0 3px 10px #8697ec;
+      box-shadow: 0 2px 6px #a3afee;
     }
   }
 }
@@ -85,12 +85,12 @@ table {
   resize: none;
   box-shadow: 0 2px 6px #c6cdf0;
 
-  &:hover {
+  &:hover, &:focus {
     box-shadow: 0 3px 10px #c6cdf0;
   }
 
   &:focus {
-    box-shadow: 0 3px 10px #8697ec;
+    box-shadow: 0 3px 10px #a3afee;
     outline: none;
   }
 }
