@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
           if (variant) equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
         });
         equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
-      // Single-letter equivalents
+      // Single-letter equivalent
       } else {
         equivalentStr = equivalent.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
       }   
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Respond to input
   function inputUpdated() {
-    // Empty
+    // If empty
     if (!textArea.value.trim().length) {
       textArea.value = "";
       textArea.style.height = "0px";
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       // Reset template tabs
       document.querySelectorAll("#sourceTemplate .nav-link").forEach((link) => (link.classList.remove("active")));
       document.getElementById("custom").classList.add("active");
-    // Not empty
+    // If not empty
     } else {
       resetIcon.classList.remove("d-none");
       copyIcon.classList.remove("d-none");
@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.remove("d-none");
     }
 
+    // Textarea auto-height
     textArea.style.height = "auto";
     textArea.style.height = textArea.scrollHeight + "px" ;
 
@@ -177,8 +178,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   
   textArea.addEventListener("input", inputUpdated);
   textArea.addEventListener("keypress", function(e) {
-    document.querySelectorAll("#sourceTemplate .nav-link").forEach((link) => (link.classList.remove("active")));
-    document.getElementById("custom").classList.add("active");
+    setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
   });
 
   // Text area reset
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     let lastElementPositionLeft = scrollContainer.querySelector("ul li:last-child").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left;
     let lastElementWidth = scrollContainer.querySelector("ul li:last-child").clientWidth;
 
-    // Fade out edges on tab scroll
+    // Fade out edges on scroll
     scrollContainer.addEventListener("scroll", function(e) {
       let scrollOffset = scrollContainer.querySelector(".h-scroll-content").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left;
       if (scrollOffset < 0) {
