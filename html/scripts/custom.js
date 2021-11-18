@@ -5,14 +5,66 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
   let t = new Transliterator(new ConfigReader());
+  let latinType = null;
 
-  // Page load actions
+  // Render source template options
+  Object.keys(SOURCE_TEMPLATES).forEach(function(t) {
+    let a = document.createElement("a");
+    a.className = "nav-link";
+    a.href = "#";
+    a.id = t;
+    a.innerHTML = SOURCE_TEMPLATES[t]["label"];
+    // Bind selection on click
+    a.addEventListener("click", function(e) {
+      document.getElementById("source").value = SOURCE_TEMPLATES[this.id]["text"];
+      inputUpdated();
+      setActiveTab(this);
+      e.preventDefault();
+    });
+    let li = document.createElement("li");
+    li.className = "nav-item";
+    li.appendChild(a);
+    document.getElementById("sourceTemplate").appendChild(li);
+  });
+  document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
+
+  // Render latin options
+  Object.keys(LATIN_CONFIGS).forEach(function(c) {
+    let a = document.createElement("a");
+    a.className = "nav-link";
+    a.href = "#";
+    a.id = c;
+    a.innerHTML = LATIN_CONFIGS[c]["name"];
+    // Bind selection on click
+    a.addEventListener("click", function(e) {
+      latinType = this.id;
+      populateLatinDesc();
+      translateInput();
+      setActiveTab(this);
+      e.preventDefault();
+    });
+    let li = document.createElement("li");
+    li.className = "nav-item";
+    li.appendChild(a);
+    document.getElementById("latinType").appendChild(li);
+  });
+  let latinTab = document.querySelector("#latinType li:first-child a");
+  latinTab.classList.add("active");
+  latinType = latinTab.id;
+  
+  // Page load initial actions
   document.getElementById("source").focus();
-  populateAlphabet();
+  populateLatinDesc();
   translateInput();
 
-  // Populate alphabet table
-  function populateAlphabet() {
+  // Mark tab as active
+  function setActiveTab(a) {
+    a.closest(".nav").querySelectorAll(".nav-link").forEach((sibling) => (sibling.classList.remove("active")));
+    a.classList.add("active");
+  };
+
+  // Populate selected latin description
+  function populateLatinDesc() {
     const LETTER_INDEX = {
       1 : "а",
       2 : "б",
@@ -49,10 +101,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
       33 : "я"
     }
 
+    // Populate desc
+    document.querySelector("#desc p").innerHTML = LATIN_CONFIGS[latinType]["desc"];
+
+    // Populate table
     for (let i = 1; i <= 33; i++) {
       let equivalentStr = "";
-      let equivalent = LATIN_CONFIGS[document.querySelector("#latinType .active").id]["dict"][LETTER_INDEX[i]];
+      let equivalent = LATIN_CONFIGS[latinType]["dict"][LETTER_INDEX[i]];
       
+      // Multi-letter equivalents
       if (equivalent.constructor === Array) { 
         let uniqueEquivalents = equivalent.flat(1).filter(function(item, pos) {
           return equivalent.flat(1).indexOf(item) == pos;
@@ -61,17 +118,28 @@ document.addEventListener("DOMContentLoaded", function(e) {
           if (variant) equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
         });
         equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
+      // Single-letter equivalents
       } else {
         equivalentStr = equivalent.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
       }   
-
       document.getElementById("letter-" + i).innerHTML = (equivalentStr.trim().length) ? equivalentStr : "—";
     }
+
+    // Extra chars, if exist
+    if (LATIN_CONFIGS[latinType]["softedDict"] && Object.keys(LATIN_CONFIGS[latinType]["softedDict"]).length) {
+      document.querySelector("#desc dl").classList.remove("d-none");
+      document.querySelector("#desc dd").innerHTML = "+++";
+    } else {
+      document.querySelector("#desc dl").classList.add("d-none");
+    }
+
+    // Link
+    document.querySelector("#desc a").href = LATIN_CONFIGS[latinType]["link"];
   }
 
   // Translate input
   function translateInput() {   
-    t.useConfig(document.querySelector("#latinType .active").id);
+    t.useConfig(latinType);
     if (textArea.value.trim().length) {
       resultText.innerHTML = t.transliterate(textArea.value);
     } else {
@@ -143,27 +211,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }, 3000);
 
     e.preventDefault();
-  });
-
-  // Tab selection
-  document.querySelectorAll(".nav .nav-link").forEach( function(link) {
-    link.addEventListener("click", function(e) {   
-      this.closest(".nav").querySelectorAll(".nav-link").forEach((sibling) => (sibling.classList.remove("active")));
-      this.classList.add("active");
-
-      // Selecting source template
-      if (this.closest("#sourceTemplate")) {
-        document.getElementById("source").value = SOURCE_TEMPLATES[link.id];
-        inputUpdated();
-      // Selecting latin type
-      } else {
-        document.querySelectorAll("#desc .tab").forEach((tab) => (tab.classList.remove("active")));
-        document.getElementById(this.id + "-desc").classList.add("active");
-        populateAlphabet();
-        translateInput();
-      }
-      e.preventDefault();
-    });
   });
 
   // Tab scroll behavior

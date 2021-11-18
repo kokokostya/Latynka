@@ -1,5 +1,8 @@
 const LATIN_CONFIGS = {
   "ukr-lat-jireckivka-1859": {
+    "name": "Їречківка (1859)",
+    "desc": "Проєкт латинської абетки для української (руської) мови, укладений Йосифом Їречеком на основі чеського правопису. «Пропозиція» Їречека опублікована 1859 року. Спрощена версія, без діялектичних ě, ü, ł, eu та ou.",
+    "link": "http://latynka.tak.today/works/proekt-jirecheka/",
     "hasVowelBeModifiedInsteadOfConsonantWhenSofting": false,
 
     "beforeFixDict": {},
@@ -81,6 +84,9 @@ const LATIN_CONFIGS = {
   },
 
   "ukr-lat-kabmin-2010": {
+    "name": "Паспортна транслітерація (КМУ 2010)",
+    "desc": "Офіційна транслітерація, затверджена Кабміном у 2010-му році.",
+    "link": "https://zakon.rada.gov.ua/laws/show/55-2010-%D0%BF#Text",
     "useLocationInWordAlgo": true,
 
     "beforeFixDict": {
