@@ -16,9 +16,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
     a.innerHTML = SOURCE_TEMPLATES[t]["name"];
     // Bind selection on click
     a.addEventListener("click", function(e) {
-      document.getElementById("source").value = SOURCE_TEMPLATES[this.id]["text"];
-      setActiveTab(this);
-      inputUpdated();
+      if (! this.classList.contains("active")) {
+        let txt = SOURCE_TEMPLATES[this.id]["text"];
+        document.getElementById("source").value = txt;
+        if (!txt) {
+          textArea.focus();
+        }
+        setActiveTab(this);
+        inputUpdated();
+      }
       e.preventDefault();
     });
     let li = document.createElement("li");
@@ -37,11 +43,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
     a.innerHTML = LATIN_CONFIGS[c]["name"];
     // Bind selection on click
     a.addEventListener("click", function(e) {
-      latinType = this.id;
-      populateLatinDesc();
-      translateInput();
-      setActiveTab(this);
-      if (textArea.value) updateURL();
+      if (! this.classList.contains("active")) {
+        latinType = this.id;
+        populateLatinDesc();
+        translateInput();
+        setActiveTab(this);
+        if (textArea.value) updateURL();
+      }
       e.preventDefault();
     });
     let li = document.createElement("li");
@@ -71,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   populateLatinDesc();
   inputUpdated(true);
   translateInput();
-  if (!textArea.value) document.getElementById("source").focus();
+  if (!textArea.value) textArea.focus();
 
   // Apply browser history
   window.addEventListener("popstate", function(e) {
@@ -91,8 +99,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     setActiveTab(document.getElementById(latinType));
     populateLatinDesc();
-    inputUpdated(true);
     translateInput();
+    inputUpdated(true);
   });
 
   // Update URL
