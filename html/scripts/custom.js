@@ -101,10 +101,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
   window.addEventListener("popstate", function(e) {
     if (e.state) {
       latinType = e.state.l;
-      if (e.state.t) {
+      if (e.state.t && e.state.t != document.querySelector("#sourceTemplate li:first-child a").id) {
         setActiveTab(document.getElementById(e.state.t));
         textArea.value = SOURCE_TEMPLATES[e.state.t]["text"];
       } else {
+        setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
         textArea.value = e.state.s;
       }
     } else {
