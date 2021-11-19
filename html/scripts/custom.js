@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let t = new Transliterator(new ConfigReader());
   let latinType;
 
-  // Render source template options
+  // Render source template tabs
   Object.keys(SOURCE_TEMPLATES).forEach(function(t) {
     let a = document.createElement("a");
     a.className = "nav-link";
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   });
   document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
 
-  // Render latin options
+  // Render latin tabs
   Object.keys(LATIN_CONFIGS).forEach(function(c) {
     let a = document.createElement("a");
     a.className = "nav-link";
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   latinTab.classList.add("active");
   latinType = latinTab.id;
 
-  // Parse URL params
+  // Apply URL params
   let url = new URL(window.location.href);
   let sourceTemplate = url.searchParams.get("t"); 
   if (url.searchParams.get("l")) {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   translateInput();
   if (!textArea.value) document.getElementById("source").focus();
 
-  // Browser history retrieve
+  // Apply browser history
   window.addEventListener("popstate", function(e) {
     if (e.state) {
       latinType = e.state.l;
