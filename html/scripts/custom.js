@@ -69,10 +69,32 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
 
   // Page load initial actions
-  document.getElementById("source").focus();
   populateLatinDesc();
-  inputUpdated()
+  inputUpdated();
   translateInput();
+  if (!textArea.value) document.getElementById("source").focus();
+
+  // Browser history retrieve
+  window.addEventListener("popstate", function(e) {
+    if (e.state) {
+      latinType = e.state.l;
+      if (e.state.t && e.state.t != document.querySelector("#sourceTemplate li:first-child a").id) {
+        setActiveTab(document.getElementById(e.state.t));
+        textArea.value = SOURCE_TEMPLATES[e.state.t]["text"];
+      } else {
+        setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
+        textArea.value = e.state.s;
+      }
+    } else {
+      latinType = document.querySelector("#latinType li:first-child a").id;
+      textArea.value = "";
+    }
+
+    setActiveTab(document.getElementById(latinType));
+    populateLatinDesc();
+    inputUpdated();
+    translateInput();
+  });
 
   // Update URL
   function updateURL() {
@@ -96,28 +118,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
       window.location.href.split('?')[0] + params
     );
   }
-
-  // Browser history retrieve
-  window.addEventListener("popstate", function(e) {
-    if (e.state) {
-      latinType = e.state.l;
-      if (e.state.t && e.state.t != document.querySelector("#sourceTemplate li:first-child a").id) {
-        setActiveTab(document.getElementById(e.state.t));
-        textArea.value = SOURCE_TEMPLATES[e.state.t]["text"];
-      } else {
-        setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
-        textArea.value = e.state.s;
-      }
-    } else {
-      latinType = document.querySelector("#latinType li:first-child a").id;
-      textArea.value = "";
-    }
-
-    setActiveTab(document.getElementById(latinType));
-    populateLatinDesc();
-    inputUpdated();
-    translateInput();
-  });
 
   // Mark tab as active
   function setActiveTab(a) {
@@ -262,6 +262,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   resetIcon.addEventListener("click", function(e) {  
     textArea.value = ""; 
     inputUpdated();
+    updateURL();
     document.getElementById("source").focus();
     e.preventDefault();
   });
