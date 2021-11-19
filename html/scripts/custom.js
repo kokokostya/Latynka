@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resultPlaceholder = document.getElementById("placeholder");
   let resultText = document.getElementById("destination");
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
-  let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
+  let copyIcons =  document.querySelector("#destinationContainer .icons");
   let t = new Transliterator(new ConfigReader());
   let latinType;
 
@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       populateLatinDesc();
       translateInput();
       setActiveTab(this);
+      updateURL();
       e.preventDefault();
     });
     let li = document.createElement("li");
@@ -55,7 +56,33 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Page load initial actions
   document.getElementById("source").focus();
   populateLatinDesc();
+
+  // Parse URL params
+  let url = new URL(window.location.href);
+  textArea.value = url.searchParams.get("s");
+  if (url.searchParams.get("l")) {
+    latinType = url.searchParams.get("l");
+    setActiveTab(document.getElementById(latinType));
+  }
+  inputUpdated()
   translateInput();
+
+  // Update URL
+  function updateURL() {
+    let params = "";
+    if (textArea.value.length) {
+      params += "?l=" + latinType;
+      params += "&s=" + textArea.value;
+    } 
+    window.history.pushState(
+      {
+        l : latinType,
+        s : textArea.value
+      },
+      "Latynka",
+      window.location.href.split('?')[0] + params
+    );
+  }
 
   // Mark tab as active
   function setActiveTab(a) {
@@ -129,8 +156,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
     if (LATIN_CONFIGS[latinType]["softedDict"] && Object.keys(LATIN_CONFIGS[latinType]["softedDict"]).length) {
       let extraStr = "";
 
-      console.log(LATIN_CONFIGS[latinType]["softedDict"])
-      
       for (let key in LATIN_CONFIGS[latinType]["softedDict"]) {
         let char = LATIN_CONFIGS[latinType]["softedDict"][key];
         if (char.constructor === Array) { 
@@ -154,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
 
   // Translate input
-  function translateInput() {   
+  function translateInput() {
     t.useConfig(latinType);
     if (textArea.value.trim().length) {
       resultText.innerHTML = t.transliterate(textArea.value);
@@ -170,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       textArea.value = "";
       textArea.style.height = "0px";
       resetIcon.classList.add("d-none");
-      copyIcon.classList.add("d-none");
+      copyIcons.classList.add("d-none");
       resultPlaceholder.classList.remove("d-none");
       resultText.classList.add("d-none");
 
@@ -180,10 +205,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
     // If not empty
     } else {
       resetIcon.classList.remove("d-none");
-      copyIcon.classList.remove("d-none");
+      copyIcons.classList.remove("d-none");
       resultPlaceholder.classList.add("d-none");
       resultText.classList.remove("d-none");
     }
+
+    updateURL();
 
     // Textarea auto-height
     textArea.style.height = "auto";
@@ -205,10 +232,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
     e.preventDefault();
   });
 
-  // Copy to clipboard
-  copyIcon.addEventListener("click", function(e) {
+  // Copy helper
+  function copyStr(str, subject) {
     let el = document.createElement("textarea");
-    el.value = resultText.innerHTML;
+    el.value = str;
     el.setAttribute("readonly", "");
     el.style.position = "absolute";
     el.style.left = "-9999px";
@@ -220,12 +247,22 @@ document.addEventListener("DOMContentLoaded", function(e) {
     // Render message
     let msg = document.createElement("div");
     msg.classList.add("alert", "alert-success", "small");
-    msg.innerHTML = "Скопійовано в буфер";
+    msg.innerHTML = subject + " скопійовано";
     document.body.append(msg);
     setTimeout(function() {
       msg.remove();
     }, 3000);
+  }
 
+  // Copy text
+  document.querySelector("#destinationContainer .icon-copy").addEventListener("click", function(e) {
+    copyStr(resultText.innerHTML, "Текст");
+    e.preventDefault();
+  });
+
+  // Copy link
+  document.querySelector("#destinationContainer .icon-link").addEventListener("click", function(e) {
+    copyStr(window.location.href, "Посилання");
     e.preventDefault();
   });
 
