@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       document.getElementById("source").value = SOURCE_TEMPLATES[this.id]["text"];
       inputUpdated();
       setActiveTab(this);
+      updateURL();
       e.preventDefault();
     });
     let li = document.createElement("li");
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       populateLatinDesc();
       translateInput();
       setActiveTab(this);
-      updateURL();
+      if (textArea.value) updateURL();
       e.preventDefault();
     });
     let li = document.createElement("li");
@@ -52,37 +53,70 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let latinTab = document.querySelector("#latinType li:first-child a");
   latinTab.classList.add("active");
   latinType = latinTab.id;
-  
-  // Page load initial actions
-  document.getElementById("source").focus();
-  populateLatinDesc();
 
   // Parse URL params
   let url = new URL(window.location.href);
-  textArea.value = url.searchParams.get("s");
+  let sourceTemplate = url.searchParams.get("t"); 
   if (url.searchParams.get("l")) {
     latinType = url.searchParams.get("l");
     setActiveTab(document.getElementById(latinType));
   }
+  if (sourceTemplate) {
+    setActiveTab(document.getElementById(sourceTemplate));
+    textArea.value = SOURCE_TEMPLATES[sourceTemplate]["text"];
+  } else {
+    textArea.value = url.searchParams.get("s");
+  }
+
+  // Page load initial actions
+  document.getElementById("source").focus();
+  populateLatinDesc();
   inputUpdated()
   translateInput();
 
   // Update URL
   function updateURL() {
     let params = "";
+    let sourceTemplate = document.querySelector("#sourceTemplate .active").id;
     if (textArea.value.length) {
       params += "?l=" + latinType;
-      params += "&s=" + textArea.value;
+      if (document.querySelector("#sourceTemplate li:first-child a").classList.contains("active")) {
+        params += "&s=" + textArea.value;
+      } else {
+        params += "&t=" + sourceTemplate;
+      }
     } 
     window.history.pushState(
       {
         l : latinType,
-        s : textArea.value
+        s : textArea.value,
+        t : sourceTemplate
       },
       "Latynka",
       window.location.href.split('?')[0] + params
     );
   }
+
+  // Browser history retrieve
+  window.addEventListener("popstate", function(e) {
+    if (e.state) {
+      latinType = e.state.l;
+      if (e.state.t) {
+        setActiveTab(document.getElementById(e.state.t));
+        textArea.value = SOURCE_TEMPLATES[e.state.t]["text"];
+      } else {
+        textArea.value = e.state.s;
+      }
+    } else {
+      latinType = document.querySelector("#latinType li:first-child a").id;
+      textArea.value = "";
+    }
+
+    setActiveTab(document.getElementById(latinType));
+    populateLatinDesc();
+    inputUpdated();
+    translateInput();
+  });
 
   // Mark tab as active
   function setActiveTab(a) {
@@ -210,8 +244,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.remove("d-none");
     }
 
-    updateURL();
-
     // Textarea auto-height
     textArea.style.height = "auto";
     textArea.style.height = textArea.scrollHeight + "px" ;
@@ -222,6 +254,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   textArea.addEventListener("input", inputUpdated);
   textArea.addEventListener("keypress", function(e) {
     setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
+    updateURL();
   });
 
   // Text area reset
