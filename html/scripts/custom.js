@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcon =  document.querySelector("#destinationContainer .icon-copy");
   let t = new Transliterator(new ConfigReader());
-  let latinType = null;
+  let latinType;
 
   // Render source template options
   Object.keys(SOURCE_TEMPLATES).forEach(function(t) {
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     a.className = "nav-link";
     a.href = "#";
     a.id = t;
-    a.innerHTML = SOURCE_TEMPLATES[t]["label"];
+    a.innerHTML = SOURCE_TEMPLATES[t]["name"];
     // Bind selection on click
     a.addEventListener("click", function(e) {
       document.getElementById("source").value = SOURCE_TEMPLATES[this.id]["text"];
@@ -127,8 +127,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     // Extra chars, if exist
     if (LATIN_CONFIGS[latinType]["softedDict"] && Object.keys(LATIN_CONFIGS[latinType]["softedDict"]).length) {
+      let extraStr = "";
+
+      console.log(LATIN_CONFIGS[latinType]["softedDict"])
+      
+      for (let key in LATIN_CONFIGS[latinType]["softedDict"]) {
+        let char = LATIN_CONFIGS[latinType]["softedDict"][key];
+        if (char.constructor === Array) { 
+          char.forEach( function(c) {
+            extraStr += c + ", ";
+          });
+        // Single-letter equivalent
+        } else {
+          extraStr += char + ", ";
+        }
+      }
+      extraStr = extraStr.substring(0, extraStr.length - 2);
+      document.querySelector("#desc dd").innerHTML = extraStr;
       document.querySelector("#desc dl").classList.remove("d-none");
-      document.querySelector("#desc dd").innerHTML = "+++";
     } else {
       document.querySelector("#desc dl").classList.add("d-none");
     }
