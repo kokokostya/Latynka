@@ -17,9 +17,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
     // Bind selection on click
     a.addEventListener("click", function(e) {
       document.getElementById("source").value = SOURCE_TEMPLATES[this.id]["text"];
-      inputUpdated();
       setActiveTab(this);
-      updateURL();
+      inputUpdated();
       e.preventDefault();
     });
     let li = document.createElement("li");
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Page load initial actions
   populateLatinDesc();
-  inputUpdated();
+  inputUpdated(true);
   translateInput();
   if (!textArea.value) document.getElementById("source").focus();
 
@@ -92,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     setActiveTab(document.getElementById(latinType));
     populateLatinDesc();
-    inputUpdated();
+    inputUpdated(true);
     translateInput();
   });
 
@@ -224,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
 
   // Respond to input
-  function inputUpdated() {
+  function inputUpdated(skipHistory = false) {
     // If empty
     if (!textArea.value.trim().length) {
       textArea.value = "";
@@ -249,20 +248,20 @@ document.addEventListener("DOMContentLoaded", function(e) {
     textArea.style.height = "auto";
     textArea.style.height = textArea.scrollHeight + "px" ;
 
+    if (!skipHistory) updateURL();
     translateInput();
   }
   
   textArea.addEventListener("input", inputUpdated);
-  textArea.addEventListener("keypress", function(e) {
+  textArea.addEventListener("keyup", function(e) {
     setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
-    updateURL();
+    inputUpdated();
   });
 
   // Text area reset
   resetIcon.addEventListener("click", function(e) {  
     textArea.value = ""; 
     inputUpdated();
-    updateURL();
     document.getElementById("source").focus();
     e.preventDefault();
   });
