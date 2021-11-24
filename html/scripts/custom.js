@@ -1,61 +1,53 @@
 document.addEventListener("DOMContentLoaded", function(e) {
   let textArea = document.getElementById("source");
-  let resultPlaceholder = document.getElementById("placeholder");
   let resultText = document.getElementById("destination");
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcons =  document.querySelector("#destinationContainer .icons");
   let t = new Transliterator(new ConfigReader());
   let latinType;
 
-  // Render source template tabs
-  Object.keys(SOURCE_TEMPLATES).forEach(function(t) {
-    let a = document.createElement("a");
-    a.className = "nav-link";
-    a.href = "#";
-    a.id = t;
-    a.innerHTML = SOURCE_TEMPLATES[t]["name"];
-    // Bind selection on click
-    a.addEventListener("click", function(e) {
-      if (! this.classList.contains("active")) {
-        let txt = SOURCE_TEMPLATES[this.id]["text"];
-        document.getElementById("source").value = txt;
-        if (!txt) {
-          textArea.focus();
-        }
-        setActiveTab(this);
-        inputUpdated();
-      }
-      e.preventDefault();
+  // Render tabs
+  function renderTabs(list, parentId, clickHandler) {
+    Object.keys(list).forEach(function(key) {
+      let a = document.createElement("a");
+      a.className = "nav-link";
+      a.href = "#";
+      a.id = key;
+      a.innerHTML = list[key]["name"];
+      // Bind selection on click
+      a.addEventListener("click", clickHandler);
+      let li = document.createElement("li");
+      li.className = "nav-item";
+      li.appendChild(a);
+      document.getElementById(parentId).appendChild(li);
     });
-    let li = document.createElement("li");
-    li.className = "nav-item";
-    li.appendChild(a);
-    document.getElementById("sourceTemplate").appendChild(li);
+  }
+
+  // Render source template tabs
+  renderTabs(SOURCE_TEMPLATES, "sourceTemplate", function(e) {
+    if (!this.classList.contains("active")) {
+      let txt = SOURCE_TEMPLATES[this.id]["text"];
+      document.getElementById("source").value = txt;
+      if (!txt) {
+        textArea.focus();
+      }
+      setActiveTab(this);
+      inputUpdated();
+    }
+    e.preventDefault();
   });
   document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
 
   // Render latin tabs
-  Object.keys(LATIN_CONFIGS).forEach(function(c) {
-    let a = document.createElement("a");
-    a.className = "nav-link";
-    a.href = "#";
-    a.id = c;
-    a.innerHTML = LATIN_CONFIGS[c]["name"];
-    // Bind selection on click
-    a.addEventListener("click", function(e) {
-      if (! this.classList.contains("active")) {
-        latinType = this.id;
-        populateLatinDesc();
-        translateInput();
-        setActiveTab(this);
-        if (textArea.value) updateURL();
-      }
-      e.preventDefault();
-    });
-    let li = document.createElement("li");
-    li.className = "nav-item";
-    li.appendChild(a);
-    document.getElementById("latinType").appendChild(li);
+  renderTabs(LATIN_CONFIGS, "latinType", function(e) {
+    if (!this.classList.contains("active")) {
+      latinType = this.id;
+      populateLatinDesc();
+      translateInput();
+      setActiveTab(this);
+      if (textArea.value) updateURL();
+    }
+    e.preventDefault();
   });
   let latinTab = document.querySelector("#latinType li:first-child a");
   latinTab.classList.add("active");
@@ -75,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     textArea.value = url.searchParams.get("s");
   }
 
-  // Page load initial actions
+  // Finalize page on page load
   populateLatinDesc();
   inputUpdated(true);
   translateInput();
@@ -223,11 +215,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Translate input
   function translateInput() {
     t.useConfig(latinType);
-    if (textArea.value.trim().length) {
-      resultText.innerHTML = t.transliterate(textArea.value);
-    } else {
-      resultPlaceholder.innerHTML = t.transliterate(textArea.placeholder);
-    }
+    resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value) : t.transliterate(textArea.placeholder);
   }
 
   // Respond to input
@@ -238,8 +226,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       textArea.style.height = "0px";
       resetIcon.classList.add("d-none");
       copyIcons.classList.add("d-none");
-      resultPlaceholder.classList.remove("d-none");
-      resultText.classList.add("d-none");
+      resultText.classList.add("text-muted");
 
       // Reset template tabs
       document.querySelectorAll("#sourceTemplate .nav-link").forEach((link) => (link.classList.remove("active")));
@@ -248,8 +235,21 @@ document.addEventListener("DOMContentLoaded", function(e) {
     } else {
       resetIcon.classList.remove("d-none");
       copyIcons.classList.remove("d-none");
-      resultPlaceholder.classList.add("d-none");
-      resultText.classList.remove("d-none");
+      resultText.classList.remove("text-muted");
+    }
+
+    // Textarea auto font size
+    let destination = document.getElementById("destination");
+    if (textArea.value.trim().length > 200) {
+      textArea.classList.remove("fs-5");
+      textArea.classList.add("fs-6");
+      destination.classList.remove("fs-5");
+      destination.classList.add("fs-6");
+    } else {
+      textArea.classList.remove("fs-6");
+      textArea.classList.add("fs-5");
+      destination.classList.remove("fs-6");
+      destination.classList.add("fs-5");
     }
 
     // Textarea auto-height

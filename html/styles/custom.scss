@@ -171,10 +171,11 @@ a.icon {
     .icon {
       padding: 0;
       box-shadow: none;
-      top: -.75rem;
+      top: -1.5rem;
       right: 1.75rem;
     }
   }
+
   #source {
     box-shadow: none;
   
@@ -188,11 +189,26 @@ a.icon {
   }
 
   #destinationContainer {
+    position: relative;
     padding: 0;
 
     div {
       border-radius: 0;
       min-height: 8rem;
+
+      .icons {
+        float: none;
+        position: absolute;
+        top: -1.25rem;
+        right: 1.75rem;
+
+        .icon {
+          background-color: #fff;
+          padding: 0.75rem;
+          border-radius: 2rem;
+          margin-left: .5rem;
+        }
+      }
     }
   }
 
