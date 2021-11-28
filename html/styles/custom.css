@@ -46,16 +46,6 @@ table td {
   display: block;
 }
 
-.icons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.icons li {
-  list-style: none;
-}
-
 a.icon {
   cursor: pointer;
 }
@@ -126,9 +116,13 @@ a.icon {
   resize: none;
   -webkit-box-shadow: 0 2px 6px #c6cdf0;
           box-shadow: 0 2px 6px #c6cdf0;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  transition: -webkit-box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
 }
 
-#source:hover, #source:focus {
+#source:hover {
   -webkit-box-shadow: 0 3px 10px #c6cdf0;
           box-shadow: 0 3px 10px #c6cdf0;
 }
@@ -147,6 +141,17 @@ a.icon {
   margin: 0;
 }
 
+#destinationContainer .icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+}
+
+#destinationContainer .icons li {
+  list-style: none;
+}
+
 #destination {
   word-break: break-word;
 }
@@ -162,6 +167,8 @@ a.icon {
   opacity: 1;
   -webkit-animation: fadeout 3s forwards linear;
           animation: fadeout 3s forwards linear;
+  text-align: center;
+  white-space: nowrap;
 }
 
 @-webkit-keyframes fadeout {

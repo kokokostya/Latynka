@@ -47,13 +47,6 @@ table {
   }
 }
 
-.icons {
-  display: flex;
-   li {
-     list-style: none;
-   }
-}
-
 a.icon {
   cursor: pointer;
 }
@@ -120,8 +113,9 @@ a.icon {
   height: 100%;
   resize: none;
   box-shadow: 0 2px 6px #c6cdf0;
+  transition: box-shadow 0.2s ease;
 
-  &:hover, &:focus {
+  &:hover {
     box-shadow: 0 3px 10px #c6cdf0;
   }
 
@@ -139,6 +133,15 @@ a.icon {
       margin: 0;
     }
   }
+
+  .icons {
+    display: flex;
+    padding-left: 0;
+    
+     li {
+       list-style: none;
+     }
+  }
 }
 
 #destination {
@@ -154,6 +157,8 @@ a.icon {
   transform: translate(-50%, -50%);
   opacity: 1;
   animation: fadeout 3s forwards linear;
+  text-align: center;
+  white-space: nowrap;
 }
 
 @keyframes fadeout {
