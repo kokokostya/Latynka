@@ -6,6 +6,25 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let t = new Transliterator(new ConfigReader());
   let latinType;
 
+  // Page title animation
+  let pt = "Українська латинка";
+  let ptPos = 0;
+  let ptDir = true;
+  setInterval(function() {
+    if (ptDir) {
+      document.title = t.transliterate(pt.substring(0, ptPos)) + pt.substring(ptPos, pt.length);
+    } else {
+      document.title = pt.substring(0, ptPos) + t.transliterate(pt.substring(ptPos, pt.length));
+    }
+
+    ptPos++;
+    if (pt.substring(ptPos, ptPos+1) == " ") ptPos++;
+    if (ptPos == pt.length) {
+      ptPos = 0;
+      ptDir = !ptDir;
+    }
+  }, 400);
+
   // Render tabs
   function renderTabs(list, parentId, clickHandler) {
     Object.keys(list).forEach(function(key) {
