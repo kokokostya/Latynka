@@ -94,6 +94,7 @@ a.icon {
     position: absolute;
     top: -.5rem;
     right: 0rem;
+    transition: box-shadow 0.2s ease;
   
     &:hover, &:active {
       box-shadow: 0 3px 10px #c6cdf0;

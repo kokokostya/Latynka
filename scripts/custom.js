@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Translate input
   function translateInput() {
     t.useConfig(latinType);
-    resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value) : t.transliterate(textArea.placeholder);
+    resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value.replaceAll("\n", "<br/>")) : t.transliterate(textArea.placeholder);
   }
 
   // Respond to input

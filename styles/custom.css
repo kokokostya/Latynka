@@ -95,6 +95,10 @@ a.icon {
   position: absolute;
   top: -.5rem;
   right: 0rem;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  transition: -webkit-box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
 }
 
 #sourceContainer .icon:hover, #sourceContainer .icon:active {
