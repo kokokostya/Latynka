@@ -1,0 +1,3 @@
+[submodule "scripts/t-literator-js"]
+	path = scripts/t-literator-js
+	url = https://github.com/shevchenkoartem/t-literator-js.git
