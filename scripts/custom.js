@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     ptPos++;
-    if (pt.substring(ptPos, ptPos+1) == " ") ptPos++;
+    if (pt.substring(ptPos, ptPos+1) == " " || "а") ptPos++;
     if (ptPos == pt.length) {
       ptPos = 0;
       ptDir = !ptDir;
