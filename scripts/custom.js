@@ -9,21 +9,25 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Page title animation
   let pt = "Українська латинка";
   let ptPos = 0;
-  let ptDir = true;
-  setInterval(function() {
-    if (ptDir) {
-      document.title = t.transliterate(pt.substring(0, ptPos)) + pt.substring(ptPos, pt.length);
+  let ptCycles = 0;
+  let ptInt = setInterval(function() {
+    if (ptCycles < 2) {
+      if (ptCycles % 2 == 0) {
+        document.title = t.transliterate(pt.substring(0, ptPos)) + pt.substring(ptPos, pt.length);
+      } else {
+        document.title = pt.substring(0, ptPos) + t.transliterate(pt.substring(ptPos, pt.length));
+      }
+  
+      if (ptPos == pt.length) {
+        ptPos = 0;
+        ptCycles++;
+      }
+      ptPos++;
+      if (pt.substring(ptPos, ptPos+1) == " " || "а") ptPos++;
     } else {
-      document.title = pt.substring(0, ptPos) + t.transliterate(pt.substring(ptPos, pt.length));
+      clearInterval(ptInt);
     }
-
-    ptPos++;
-    if (pt.substring(ptPos, ptPos+1) == " " || "а") ptPos++;
-    if (ptPos == pt.length) {
-      ptPos = 0;
-      ptDir = !ptDir;
-    }
-  }, 400);
+  }, 300);
 
   // Render tabs
   function renderTabs(list, parentId, clickHandler) {
