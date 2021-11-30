@@ -96,12 +96,12 @@ a.icon {
     right: 0rem;
     transition: box-shadow 0.2s ease;
   
-    &:hover, &:active {
+    &:hover {
       box-shadow: 0 3px 10px #c6cdf0;
     }
   
     &:active {
-      box-shadow: 0 2px 6px #a3afee;
+      box-shadow: 0 2px 6px #abb7f5;
     }
   }
 }
@@ -121,7 +121,7 @@ a.icon {
   }
 
   &:focus {
-    box-shadow: 0 3px 10px #a3afee;
+    box-shadow: 0 3px 10px #abb7f5;
     outline: none;
   }
 }

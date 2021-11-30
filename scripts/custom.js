@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         ptCycles++;
       }
       ptPos++;
-      if (pt.substring(ptPos, ptPos+1) == " " || "а") ptPos++;
+      if (pt.substring(ptPos, ptPos + 1) == " " || "а") ptPos++;
     } else {
       clearInterval(ptInt);
     }

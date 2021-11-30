@@ -101,14 +101,14 @@ a.icon {
   transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
 }
 
-#sourceContainer .icon:hover, #sourceContainer .icon:active {
+#sourceContainer .icon:hover {
   -webkit-box-shadow: 0 3px 10px #c6cdf0;
           box-shadow: 0 3px 10px #c6cdf0;
 }
 
 #sourceContainer .icon:active {
-  -webkit-box-shadow: 0 2px 6px #a3afee;
-          box-shadow: 0 2px 6px #a3afee;
+  -webkit-box-shadow: 0 2px 6px #abb7f5;
+          box-shadow: 0 2px 6px #abb7f5;
 }
 
 #source {
@@ -132,8 +132,8 @@ a.icon {
 }
 
 #source:focus {
-  -webkit-box-shadow: 0 3px 10px #a3afee;
-          box-shadow: 0 3px 10px #a3afee;
+  -webkit-box-shadow: 0 3px 10px #abb7f5;
+          box-shadow: 0 3px 10px #abb7f5;
   outline: none;
 }
 
