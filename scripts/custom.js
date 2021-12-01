@@ -78,16 +78,17 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Apply URL params
   let url = new URL(window.location.href);
-  let sourceTemplate = url.searchParams.get("t"); 
   if (url.searchParams.get("l")) {
     latinType = url.searchParams.get("l");
     setActiveTab(document.getElementById(latinType));
-  }
-  if (sourceTemplate) {
-    setActiveTab(document.getElementById(sourceTemplate));
-    textArea.value = SOURCE_TEMPLATES[sourceTemplate]["text"];
-  } else {
-    textArea.value = url.searchParams.get("s");
+
+    let sourceTemplate = url.searchParams.get("t"); 
+    if (sourceTemplate) {
+      setActiveTab(document.getElementById(sourceTemplate));
+      textArea.value = SOURCE_TEMPLATES[sourceTemplate]["text"];
+    } else {
+      textArea.value = url.searchParams.get("s");
+    }
   }
 
   // Finalize page on page load
