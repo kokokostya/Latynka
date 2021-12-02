@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resultText = document.getElementById("destination");
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcons =  document.querySelector("#destinationContainer .icons");
+
+  class ConfigReader {
+    getConfigObject(cfgName) {
+      return LATIN_CONFIGS[cfgName];
+    }
+  }
   let t = new Transliterator(new ConfigReader());
   let latinType;
 
@@ -65,18 +71,22 @@ document.addEventListener("DOMContentLoaded", function(e) {
   renderTabs(LATIN_CONFIGS, "latinType", function(e) {
     if (!this.classList.contains("active")) {
       latinType = this.id;
-      populateLatinDesc();
+      t.useConfig(latinType);
       translateInput();
+      populateLatinDesc();
       setActiveTab(this);
       if (textArea.value) updateURL();
     }
     e.preventDefault();
   });
-  let latinTab = document.querySelector("#latinType li:first-child a");
-  latinTab.classList.add("active");
-  latinType = latinTab.id;
 
-  // Apply URL params
+  // Mark tab as active
+  function setActiveTab(a) {
+    a.closest(".nav").querySelectorAll(".nav-link").forEach((sibling) => (sibling.classList.remove("active")));
+    a.classList.add("active");
+  };
+  
+  // React to URL params
   let url = new URL(window.location.href);
   if (url.searchParams.get("l")) {
     latinType = url.searchParams.get("l");
@@ -89,35 +99,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
     } else {
       textArea.value = url.searchParams.get("s");
     }
+  } else {
+    let latinTab = document.querySelector("#latinType li:first-child a");
+    latinTab.classList.add("active");
+    latinType = latinTab.id;
+    textArea.focus();
   }
-
-  // Finalize page on page load
-  populateLatinDesc();
+  t.useConfig(latinType);
   inputUpdated(true);
-  translateInput();
-  if (!textArea.value) textArea.focus();
-
-  // Apply browser history
-  window.addEventListener("popstate", function(e) {
-    if (e.state) {
-      latinType = e.state.l;
-      if (e.state.t && e.state.t != document.querySelector("#sourceTemplate li:first-child a").id) {
-        setActiveTab(document.getElementById(e.state.t));
-        textArea.value = SOURCE_TEMPLATES[e.state.t]["text"];
-      } else {
-        setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
-        textArea.value = e.state.s;
-      }
-    } else {
-      latinType = document.querySelector("#latinType li:first-child a").id;
-      textArea.value = "";
-    }
-
-    setActiveTab(document.getElementById(latinType));
-    populateLatinDesc();
-    translateInput();
-    inputUpdated(true);
-  });
+  populateLatinDesc();
 
   // Update URL
   function updateURL() {
@@ -142,11 +132,26 @@ document.addEventListener("DOMContentLoaded", function(e) {
     );
   }
 
-  // Mark tab as active
-  function setActiveTab(a) {
-    a.closest(".nav").querySelectorAll(".nav-link").forEach((sibling) => (sibling.classList.remove("active")));
-    a.classList.add("active");
-  };
+  // Apply browser history
+  window.addEventListener("popstate", function(e) {
+    if (e.state) {
+      latinType = e.state.l;
+      if (e.state.t && e.state.t != document.querySelector("#sourceTemplate li:first-child a").id) {
+        setActiveTab(document.getElementById(e.state.t));
+        textArea.value = SOURCE_TEMPLATES[e.state.t]["text"];
+      } else {
+        setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
+        textArea.value = e.state.s;
+      }
+    } else {
+      latinType = document.querySelector("#latinType li:first-child a").id;
+      textArea.value = "";
+    }
+
+    setActiveTab(document.getElementById(latinType));
+    populateLatinDesc();
+    inputUpdated(true);
+  });
 
   // Populate selected latin description
   function populateLatinDesc() {
@@ -189,44 +194,23 @@ document.addEventListener("DOMContentLoaded", function(e) {
     // Populate desc
     document.querySelector("#desc p").innerHTML = LATIN_CONFIGS[latinType]["desc"];
 
+    let dic = t.getConfigTransliterationInfo();
+    let html = "<tr><td colspan=6></td></tr>";
+
     // Populate table
-    for (let i = 1; i <= 33; i++) {
-      let equivalentStr = "";
-      let equivalent = LATIN_CONFIGS[latinType]["dict"][LETTER_INDEX[i]];
-      
-      // Multi-letter equivalents
-      if (equivalent.constructor === Array) { 
-        let uniqueEquivalents = equivalent.flat(1).filter(function(item, pos) {
-          return equivalent.flat(1).indexOf(item) == pos;
-        });
-        uniqueEquivalents.forEach( function(variant) {
-          if (variant) equivalentStr += variant.charAt(0).toUpperCase() + variant.slice(1) + " " + variant + ", ";
-        });
-        equivalentStr = equivalentStr.substring(0, equivalentStr.length - 2);
-      // Single-letter equivalent
-      } else {
-        equivalentStr = equivalent.charAt(0).toUpperCase() + equivalent.slice(1) + " " + equivalent;
-      }   
-      document.getElementById("letter-" + i).innerHTML = (equivalentStr.trim().length) ? equivalentStr : "—";
+    for (let i = 1; i <= 11; i++) {
+      html += "<tr>";
+      for (let j = 0; j <= 2; j++) {
+        let letter = LETTER_INDEX[i + j*11].toUpperCase() + " " + LETTER_INDEX[i + j*11];
+        html += "<th>" + letter + "</th><td>" + dic[letter] + "</td>";
+      }
+      html += "</tr>";
     }
+    document.querySelector("#desc tbody").innerHTML = html;
 
     // Extra chars, if exist
-    if (LATIN_CONFIGS[latinType]["softedDict"] && Object.keys(LATIN_CONFIGS[latinType]["softedDict"]).length) {
-      let extraStr = "";
-
-      for (let key in LATIN_CONFIGS[latinType]["softedDict"]) {
-        let char = LATIN_CONFIGS[latinType]["softedDict"][key];
-        if (char.constructor === Array) { 
-          char.forEach( function(c) {
-            extraStr += c + ", ";
-          });
-        // Single-letter equivalent
-        } else {
-          extraStr += char + ", ";
-        }
-      }
-      extraStr = extraStr.substring(0, extraStr.length - 2);
-      document.querySelector("#desc dd").innerHTML = extraStr;
+    if (dic["_others_"]) {
+      document.querySelector("#desc dd").innerHTML = dic["_others_"];
       document.querySelector("#desc dl").classList.remove("d-none");
     } else {
       document.querySelector("#desc dl").classList.add("d-none");
@@ -238,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Translate input
   function translateInput() {
-    t.useConfig(latinType);
     resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value.replaceAll("\n", "<br/>")) : t.transliterate(textArea.placeholder);
   }
 
