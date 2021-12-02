@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   class ConfigReader {
     getConfigObject(cfgName) {
-      return LATIN_CONFIGS[cfgName];
+      return T_LITERATOR_CONFIGS[cfgName];
     }
   }
   let t = new Transliterator(new ConfigReader());
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
 
   // Render latin tabs
-  renderTabs(LATIN_CONFIGS, "latinType", function(e) {
+  renderTabs(T_LITERATOR_CONFIGS, "latinType", function(e) {
     if (!this.classList.contains("active")) {
       latinType = this.id;
       t.useConfig(latinType);
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     // Populate desc
-    document.querySelector("#desc p").innerHTML = LATIN_CONFIGS[latinType]["desc"];
+    document.querySelector("#desc p").innerHTML = T_LITERATOR_CONFIGS[latinType]["desc"];
 
     let dic = t.getConfigTransliterationInfo();
     let html = "<tr><td colspan=6></td></tr>";
@@ -217,7 +217,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     // Link
-    document.querySelector("#desc a").href = LATIN_CONFIGS[latinType]["link"];
+    if (T_LITERATOR_CONFIGS[latinType]["link"]) {
+      document.querySelector("#desc a").href = T_LITERATOR_CONFIGS[latinType]["link"];
+      document.querySelector("#desc a").classList.remove("d-none");
+    } else {
+      document.querySelector("#desc a").classList.add("d-none");
+    }
   }
 
   // Translate input

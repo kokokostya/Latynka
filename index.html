@@ -19,9 +19,17 @@
     <link href="images/icon.svg" rel="icon">
 
     <script src="scripts/t-literator-js/src/t-literator.js"></script>
+    <script src="scripts/t-literator-js/configs/deploy/result/t-literator-configs.js"></script>
     <script src="scripts/templates.js"></script>
-    <script src="scripts/configs.js"></script>
-    <script src="scripts/custom.js"></script>    
+    <script src="scripts/custom.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5E6XDSDZK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N5E6XDSDZK');
+    </script>
   </head>
   
   <body>
@@ -82,7 +90,7 @@
             <dd></dd>
           </dl>
 
-          <a href="#">Детальніше</a>
+          <a href="#" class="d-none">Детальніше</a>
         </article>
 
         <article class="col col-lg-8 px-4">
