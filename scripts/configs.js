@@ -1,6 +1,6 @@
 const LATIN_CONFIGS = {
-  "ukr-lat-abecadlo-1835": {
-    code: "ukr-lat-abecadlo-1835",
+  "abecadlo": {
+    code: "abecadlo",
     name: "Абецадло",
     desc: "Проєкт української (руської) латинської абетки, розроблений українським греко-католицьким священиком Йосипом Лозинським на основі польського алфавіту (абецадла). Вперше опублікований у Львові 1834 року. Спрощена версія, без особливостей етимологічного характеру з особливим вживанням é, ł, ó та ін. (наприклад, opysał замість opysaw, świato замість swiato, чи Ukraina замість Ukrajina). Також додане використання дієрезисів (ä, ë, ö, ü) для роздільного читання двох літер, які позначають голосні звуки (наприклад, Уляна – Uliana, але ліана – liäna).",
     link: "https://uk.wikipedia.org/wiki/%D0%90%D0%B1%D0%B5%D1%86%D0%B0%D0%B4%D0%BB%D0%BE",
@@ -121,8 +121,8 @@ const LATIN_CONFIGS = {
     substitutionForUndefinedResult: "",
   },
 
-  "ukr-lat-jireckivka-1859": {
-    code: "ukr-lat-jireckivka-1859",
+  "jireckivka": {
+    code: "jireckivka",
     name: "Їречківка",
     desc: "Проєкт латинської абетки для української (руської) мови, укладений Йосифом Їречеком на основі чеського правопису. «Пропозиція» Їречека опублікована 1859 року. Спрощена версія, без діялектичних ě, ü, ł, eu та ou.",
     link: "http://latynka.tak.today/works/proekt-jirecheka/",
@@ -247,8 +247,8 @@ const LATIN_CONFIGS = {
     substitutionForUndefinedResult: "",
   },
 
-  "ukr-lat-heohraf-1996": {
-    code: "ukr-lat-heohraf-1996",
+  "heohraf": {
+    code: "heohraf",
     name: "Географічна",
     desc: "Згідно з нормативною таблицею для відтворення українських власних назв засобами англійської мови у законодавчих та офіційних актах, затвердженою Українською комісією з питань правничої термінології у 1996-му році.",
     link: "https://uk.wikipedia.org/wiki/%D0%9B%D0%B0%D1%82%D0%B8%D0%BD%D1%96%D0%B7%D0%B0%D1%86%D1%96%D1%8F_%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%BC%D0%BE%D0%B2%D0%B8",
@@ -310,8 +310,8 @@ const LATIN_CONFIGS = {
     substitutionForUndefinedResult: "",
   },
 
-  "ukr-lat-kabmin-2010": {
-    code: "ukr-lat-kabmin-2010",
+  "kabmin": {
+    code: "kabmin",
     name: "Паспортна",
     desc: "Офіційна транслітерація, затверджена Кабміном у 2010-му році.",
     link: "https://zakon.rada.gov.ua/laws/show/55-2010-%D0%BF#Text",
@@ -373,8 +373,8 @@ const LATIN_CONFIGS = {
     substitutionForUndefinedResult: "",
   },
 
-  "ukr-lat-temivka-2021": {
-    code: "ukr-lat-temivka-2021",
+  "temivka": {
+    code: "temivka",
     name: "Темівка",
     desc: 'Концептуальний проєкт української латинки, оснований на тотожності функцій діакритичної крапки (для пом\'якшення) та умлаута (для йотування) над голосними: ı→i⇒ï, a→ȧ⇒ä, e→ė⇒ë, o→ȯ⇒ö, u→u̇⇒ü. Викристовується Темом Шевченком, автором "руховичка" цього транслітератора.',
     from: "ukr",
