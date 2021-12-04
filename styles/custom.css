@@ -225,8 +225,8 @@ a.icon {
 
 @media (max-width: 992px) {
   .logo {
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
   }
   #sourceContainer .icon {
     padding: 0;
