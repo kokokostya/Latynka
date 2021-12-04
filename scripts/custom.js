@@ -35,48 +35,61 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
   }, 300);
 
-  // Render tabs
-  function renderTabs(list, parentId, clickHandler) {
-    Object.keys(list).forEach(function(key) {
-      let a = document.createElement("a");
-      a.className = "nav-link";
-      a.href = "#";
-      a.id = key;
-      a.innerHTML = list[key]["name"];
-      // Bind selection on click
-      a.addEventListener("click", clickHandler);
-      let li = document.createElement("li");
-      li.className = "nav-item";
-      li.appendChild(a);
-      document.getElementById(parentId).appendChild(li);
-    });
+  // Generate tab list item
+  function makeTab(list, key, clickHandler) {
+    let a = document.createElement("a");
+    a.className = "nav-link";
+    a.href = "#";
+    a.id = key;
+    a.innerHTML = list[key]["name"];
+    // Bind selection on click
+    a.addEventListener("click", clickHandler);
+    let li = document.createElement("li");
+    li.className = "nav-item";
+    li.appendChild(a);
+    return li;
   }
 
   // Render source template tabs
-  renderTabs(SOURCE_TEMPLATES, "sourceTemplate", function(e) {
-    if (!this.classList.contains("active")) {
-      let txt = SOURCE_TEMPLATES[this.id]["text"];
-      document.getElementById("source").value = txt;
-      if (!txt) {
-        textArea.focus();
+  Object.keys(SOURCE_TEMPLATES).forEach(function(key) {
+    let li = makeTab(SOURCE_TEMPLATES, key, function(e) {
+      if (!this.classList.contains("active")) {
+        let txt = SOURCE_TEMPLATES[this.id]["text"];
+        document.getElementById("source").value = txt;
+        if (!txt) {
+          textArea.focus();
+        }
+        setActiveTab(this);
+        inputUpdated();
       }
-      setActiveTab(this);
-      inputUpdated();
-    }
-    e.preventDefault();
+      e.preventDefault();
+    });
+
+    document.getElementById("sourceTemplate").appendChild(li);
   });
   document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
 
   // Render latin tabs
-  renderTabs(T_LITERATOR_CONFIGS, "latinType", function(e) {
-    if (!this.classList.contains("active")) {
-      latinType = this.id;
-      t.useConfig(latinType);
-      translateInput();
-      populateLatinDesc();
-      setActiveTab(this);
-      if (textArea.value) updateURL();
-    }
+  Object.keys(T_LITERATOR_CONFIGS).forEach(function(key) {
+    let li = makeTab(T_LITERATOR_CONFIGS, key, function(e) {
+      if (!this.classList.contains("active")) {
+        latinType = this.id;
+        t.useConfig(latinType);
+        translateInput();
+        populateLatinDesc();
+        setActiveTab(this);
+        if (textArea.value) updateURL();
+      }
+      e.preventDefault();
+    });
+
+    if (!T_LITERATOR_CONFIGS[key]["isEssential"]) li.classList.add("hidden");    
+    document.getElementById("latinType").insertBefore(li, document.querySelector("#latinType .more-control"));
+  });
+
+  // Expand/collapse latin tabs
+  document.querySelector("#latinType .more-control a").addEventListener("click", function(e) {
+    document.getElementById("latinType").classList.toggle("show-all");
     e.preventDefault();
   });
 
@@ -101,8 +114,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
   } else {
     let latinTab = document.querySelector("#latinType li:first-child a");
-    latinTab.classList.add("active");
     latinType = latinTab.id;
+    setActiveTab(latinTab);
     textArea.focus();
   }
   t.useConfig(latinType);

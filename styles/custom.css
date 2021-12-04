@@ -11,6 +11,30 @@ table td {
   width: 15%;
 }
 
+ul .hidden {
+  display: none;
+}
+
+ul .more-control .more {
+  display: auto;
+}
+
+ul .more-control .less {
+  display: none;
+}
+
+ul.show-all .hidden {
+  display: block;
+}
+
+ul.show-all .more-control .more {
+  display: none;
+}
+
+ul.show-all .more-control .less {
+  display: block;
+}
+
 .logo {
   width: 184px;
   height: 27px;

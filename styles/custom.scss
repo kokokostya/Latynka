@@ -12,6 +12,38 @@ table {
   }
 }
 
+ul {
+  .hidden {
+    display: none;
+  }
+
+  .more-control {
+    .more {
+      display: auto;
+    }
+
+    .less {
+      display: none;
+    }
+  }
+
+  &.show-all {
+    .hidden {
+      display: block;
+    }
+
+    .more-control {
+      .more {
+        display: none;
+      }
+  
+      .less {
+        display: block;
+      }
+    }
+  }
+}
+
 .logo {
   width: 184px;
   height: 27px;
