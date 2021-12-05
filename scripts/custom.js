@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Translate input
   function translateInput() {
-    resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value.replaceAll("\n", "<br/>")) : t.transliterate(textArea.placeholder);
+    resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value).replaceAll("\n", "<br/>") : t.transliterate(textArea.placeholder).replaceAll("\n", "<br/>");
   }
 
   // Respond to input
