@@ -31,24 +31,10 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
 
 .dark {
   background: $bg;
-  // font-family: 'Monaco', monospace;
-  // font-size: 90%;
   color: $txt;
-
-  h2 {
-    // font-weight: 300;
-  }
 
   label {
     color: $txt-muted-lighter;
-  }
-
-  .fs-5 {
-    // font-size: 1.1rem !important;
-  }
-
-  .fs-6 {
-    // font-size: .9rem !important;
   }
 
   .bg-light {
