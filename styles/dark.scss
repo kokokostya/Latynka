@@ -1,0 +1,175 @@
+$bg: #123;
+
+$bg-touch-light: lighten($bg, 3%);
+$bg-touch-light: desaturate($bg-touch-light, 3%);
+
+$bg-light: lighten($bg, 7%);
+$bg-light: desaturate($bg-light, 7%);
+
+$bg-lighter: lighten($bg, 20%);
+$bg-lighter: desaturate($bg-lighter, 20%);
+
+$bg-lightest: lighten($bg, 25%);
+$bg-lightest: desaturate($bg-lightest, 25%);
+
+$bg-touch-darker: darken($bg, 2%);
+$bg-touch-darker: saturate($bg-touch-darker, 2%);
+
+$bg-dark: darken($bg, 5%);
+$bg-dark: saturate($bg-dark, 5%);
+
+$bg-darker: darken($bg, 10%);
+$bg-darker: saturate($bg-darker, 10%);
+
+$txt: #bcd;
+
+$txt-muted: lighten($bg, 25%);
+$txt-muted: desaturate($txt-muted, 25%);
+
+$txt-muted-lighter: lighten($bg, 35%);
+$txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
+
+.dark {
+  background: $bg;
+  // font-family: 'Monaco', monospace;
+  // font-size: 90%;
+  color: $txt;
+
+  h2 {
+    // font-weight: 300;
+  }
+
+  label {
+    color: $txt-muted-lighter;
+  }
+
+  .fs-5 {
+    // font-size: 1.1rem !important;
+  }
+
+  .fs-6 {
+    // font-size: .9rem !important;
+  }
+
+  .bg-light {
+    background: $bg-light !important;
+  }
+
+  .text-muted {
+    color: $txt-muted !important;
+  }
+
+  .table {
+    color: $txt;
+    border-color: $bg-light;
+
+    th {
+      color: $txt-muted-lighter;
+    }
+  }
+
+  .nav-pills .nav-link.active {
+    color: $txt;
+    background-color: $bg-light;
+  }
+
+  .nav-pills .nav-link:hover {
+    background-color: $bg-touch-darker;
+  }
+
+  .logo {
+    background-color: $bg-lighter;
+
+    &:hover, &:active {
+      background-color: #3355FF;
+    }
+  }
+  
+  .theme-control {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233c556f' class='bi bi-sun-fill' viewBox='0 0 16 16'><path d='M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z'/></svg>");
+  
+    &:hover {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233355ff' class='bi bi-sun-fill' viewBox='0 0 16 16'><path d='M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z'/></svg>");
+    }
+  }
+
+  #sourceContainer {
+    .icon {
+      background-color: $bg-light;
+      box-shadow: 0 1px 3px $bg-dark;
+    
+      &:hover {
+        box-shadow: 0 2px 6px $bg-dark;
+      }
+    
+      &:active {
+        box-shadow: 0 2px 6px $bg-darker;
+      }
+    }
+  }
+
+  #source {
+    background: $bg-lighter;
+    border-radius: 10px;
+    box-shadow: none;
+    color: $txt;
+    box-shadow: 0 2px 6px $bg-dark;
+    transition: box-shadow 0.2s ease;
+  
+    &:hover {
+      box-shadow: 0 3px 10px $bg-dark;
+    }
+  
+    &:focus {
+      box-shadow: 0 3px 10px $bg-darker;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $txt-muted-lighter;
+    }
+  } 
+
+  @media (max-width: 992px) {
+    .h-scroll {
+      .fadeout {
+        &.fadeout-left {
+          left: 0;
+          background-image: linear-gradient(to right, rgba(17,34,51,1), rgba(17,34,51,0));
+        }
+      
+        &.fadeout-right {
+          right: 0;
+          background-image: linear-gradient(to right, rgba(17,34,51,0), rgba(17,34,51,1));
+        }
+      }
+    }
+  
+    #sourceContainer {
+      .icon {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+  
+    #source {
+      background: none;
+      box-shadow: none;
+
+      &:hover {
+        box-shadow: none;
+      }
+    
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  
+    #destinationContainer {
+      div .icons .icon {
+        background-color: $bg;
+      }
+    }
+  }
+}
+

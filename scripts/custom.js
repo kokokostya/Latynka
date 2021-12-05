@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
   function makeTab(list, key, clickHandler) {
     let a = document.createElement("a");
     a.className = "nav-link";
-    a.href = "#";
     a.id = key;
     a.innerHTML = list[key]["name"];
     // Bind selection on click
@@ -104,6 +103,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
       a.closest(".nav-item").classList.add("has-active");
     }
   };
+
+  // Set theme from cookies
+  if (document.cookie.indexOf("theme=dark") >= 0) document.querySelector("body").classList.add("dark");
   
   // React to URL params
   let url = new URL(window.location.href);
@@ -284,8 +286,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     // Textarea auto-height
+    textArea.style.minHeight = "8rem";
     textArea.style.height = "auto";
     textArea.style.height = textArea.scrollHeight + "px" ;
+    textArea.style.minHeight = "100%";
 
     if (!skipHistory) updateURL();
     translateInput();
@@ -361,5 +365,20 @@ document.addEventListener("DOMContentLoaded", function(e) {
         this.closest(".h-scroll").querySelector(".fadeout-right").classList.add("d-none");
       }
     });
+  });
+
+  // Toggle theme
+  document.querySelector(".theme-control").addEventListener("click", function(e) {
+    document.querySelector("body").classList.toggle("dark");
+
+    let date = new Date();
+    date.setTime(date.getTime() + (365*24*60*60*1000));
+    if (document.querySelector("body").classList.contains("dark")) {
+      document.cookie = "theme=dark; expires=" + date.toUTCString() + "; path=/";
+    } else {
+      document.cookie = "theme=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    }
+    
+    e.preventDefault();
   });
 });

@@ -1,0 +1,141 @@
+.dark {
+  background: #123;
+  color: #bcd;
+}
+
+.dark label {
+  color: #697b8e;
+}
+
+.dark .bg-light {
+  background: #1e344a !important;
+}
+
+.dark .text-muted {
+  color: #49627a !important;
+}
+
+.dark .table {
+  color: #bcd;
+  border-color: #1e344a;
+}
+
+.dark .table th {
+  color: #697b8e;
+}
+
+.dark .nav-pills .nav-link.active {
+  color: #bcd;
+  background-color: #1e344a;
+}
+
+.dark .nav-pills .nav-link:hover {
+  background-color: #0e1d2c;
+}
+
+.dark .logo {
+  background-color: #3c556f;
+}
+
+.dark .logo:hover, .dark .logo:active {
+  background-color: #3355FF;
+}
+
+.dark .theme-control {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233c556f' class='bi bi-sun-fill' viewBox='0 0 16 16'><path d='M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z'/></svg>");
+}
+
+.dark .theme-control:hover {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233355ff' class='bi bi-sun-fill' viewBox='0 0 16 16'><path d='M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z'/></svg>");
+}
+
+.dark #sourceContainer .icon {
+  background-color: #1e344a;
+  -webkit-box-shadow: 0 1px 3px #0a1521;
+          box-shadow: 0 1px 3px #0a1521;
+}
+
+.dark #sourceContainer .icon:hover {
+  -webkit-box-shadow: 0 2px 6px #0a1521;
+          box-shadow: 0 2px 6px #0a1521;
+}
+
+.dark #sourceContainer .icon:active {
+  -webkit-box-shadow: 0 2px 6px #03090e;
+          box-shadow: 0 2px 6px #03090e;
+}
+
+.dark #source {
+  background: #3c556f;
+  border-radius: 10px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  color: #bcd;
+  -webkit-box-shadow: 0 2px 6px #0a1521;
+          box-shadow: 0 2px 6px #0a1521;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  transition: -webkit-box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease;
+}
+
+.dark #source:hover {
+  -webkit-box-shadow: 0 3px 10px #0a1521;
+          box-shadow: 0 3px 10px #0a1521;
+}
+
+.dark #source:focus {
+  -webkit-box-shadow: 0 3px 10px #03090e;
+          box-shadow: 0 3px 10px #03090e;
+  outline: none;
+}
+
+.dark #source::-webkit-input-placeholder {
+  color: #697b8e;
+}
+
+.dark #source:-ms-input-placeholder {
+  color: #697b8e;
+}
+
+.dark #source::-ms-input-placeholder {
+  color: #697b8e;
+}
+
+.dark #source::placeholder {
+  color: #697b8e;
+}
+
+@media (max-width: 992px) {
+  .dark .h-scroll .fadeout.fadeout-left {
+    left: 0;
+    background-image: -webkit-gradient(linear, left top, right top, from(#112233), to(rgba(17, 34, 51, 0)));
+    background-image: linear-gradient(to right, #112233, rgba(17, 34, 51, 0));
+  }
+  .dark .h-scroll .fadeout.fadeout-right {
+    right: 0;
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(17, 34, 51, 0)), to(#112233));
+    background-image: linear-gradient(to right, rgba(17, 34, 51, 0), #112233);
+  }
+  .dark #sourceContainer .icon {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .dark #source {
+    background: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .dark #source:hover {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .dark #source:focus {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .dark #destinationContainer div .icons .icon {
+    background-color: #123;
+  }
+}
