@@ -84,12 +84,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
     });
 
     if (!T_LITERATOR_CONFIGS[key]["isEssential"]) li.classList.add("hidden");    
-    document.getElementById("latinType").insertBefore(li, document.querySelector("#latinType .more-control"));
+    document.getElementById("latinType").insertBefore(li, document.querySelector("#latinType .expandable-control"));
   });
 
   // Expand/collapse latin tabs
-  document.querySelector("#latinType .more-control a").addEventListener("click", function(e) {
-    document.getElementById("latinType").classList.toggle("show-all");
+  document.querySelector("#latinType .expandable-control a").addEventListener("click", function(e) {
+    document.getElementById("latinType").classList.toggle("expanded");
     e.preventDefault();
   });
 
@@ -97,6 +97,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
   function setActiveTab(a) {
     a.closest(".nav").querySelectorAll(".nav-link").forEach((sibling) => (sibling.classList.remove("active")));
     a.classList.add("active");
+
+    let expandableContainer = a.closest(".expandable");
+    if (expandableContainer) {
+      expandableContainer.querySelectorAll(".nav-item").forEach((sibling) => (sibling.classList.remove("has-active")));
+      a.closest(".nav-item").classList.add("has-active");
+    }
   };
   
   // React to URL params

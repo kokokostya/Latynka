@@ -17,32 +17,36 @@ table {
   }
 }
 
-ul {
+.expandable {
   .hidden {
     display: none;
   }
 
-  .more-control {
-    .more {
+  .has-active {
+    display: block;
+  }
+
+  .expandable-control {
+    .expand {
       display: auto;
     }
 
-    .less {
+    .collapse {
       display: none;
     }
   }
 
-  &.show-all {
+  &.expanded {
     .hidden {
       display: block;
     }
 
-    .more-control {
-      .more {
+    .expandable-control {
+      .expand {
         display: none;
       }
   
-      .less {
+      .collapse {
         display: block;
       }
     }

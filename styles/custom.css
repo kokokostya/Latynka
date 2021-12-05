@@ -16,27 +16,31 @@ table td {
   width: 20%;
 }
 
-ul .hidden {
+.expandable .hidden {
   display: none;
 }
 
-ul .more-control .more {
-  display: auto;
-}
-
-ul .more-control .less {
-  display: none;
-}
-
-ul.show-all .hidden {
+.expandable .has-active {
   display: block;
 }
 
-ul.show-all .more-control .more {
+.expandable .expandable-control .expand {
+  display: auto;
+}
+
+.expandable .expandable-control .collapse {
   display: none;
 }
 
-ul.show-all .more-control .less {
+.expandable.expanded .hidden {
+  display: block;
+}
+
+.expandable.expanded .expandable-control .expand {
+  display: none;
+}
+
+.expandable.expanded .expandable-control .collapse {
   display: block;
 }
 
