@@ -186,9 +186,7 @@ a.icon {
 }
 
 #source:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  outline: 4px solid rgba(64, 164, 255, 0.33);
+  outline: 4px solid rgba(64, 164, 255, 0.2);
 }
 
 #destinationContainer div {
