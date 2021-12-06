@@ -1,4 +1,4 @@
-$bg: #123;
+$bg: #10202c;
 
 $bg-touch-light: lighten($bg, 3%);
 $bg-touch-light: desaturate($bg-touch-light, 3%);
@@ -18,8 +18,8 @@ $bg-touch-darker: saturate($bg-touch-darker, 2%);
 $bg-dark: darken($bg, 5%);
 $bg-dark: saturate($bg-dark, 5%);
 
-$bg-darker: darken($bg, 10%);
-$bg-darker: saturate($bg-darker, 10%);
+$bg-darker: darken($bg, 8%);
+$bg-darker: saturate($bg-darker, 8%);
 
 $txt: #bcd;
 
@@ -99,16 +99,15 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
     border-radius: 10px;
     box-shadow: none;
     color: $txt;
-    box-shadow: 0 2px 6px $bg-dark;
+    box-shadow: 0 0 6px $bg-dark;
     transition: box-shadow 0.2s ease;
   
     &:hover {
-      box-shadow: 0 3px 10px $bg-dark;
+      box-shadow: 0 0 10px $bg-darker;
     }
   
     &:focus {
-      box-shadow: 0 3px 10px $bg-darker;
-      outline: none;
+      outline: 4px solid rgba(64,164,255,.15);
     }
 
     &::placeholder {
@@ -158,4 +157,3 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
     }
   }
 }
-
