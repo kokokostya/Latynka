@@ -26,7 +26,7 @@
 
 .dark .nav-pills .nav-link.active {
   color: #bcd;
-  background-color: #1d3343;
+  background-color: #1d3343 !important;
 }
 
 .dark .nav-pills .nav-link:hover {

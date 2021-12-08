@@ -56,7 +56,7 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
 
   .nav-pills .nav-link.active {
     color: $txt;
-    background-color: $bg-light;
+    background-color: $bg-light !important;
   }
 
   .nav-pills .nav-link:hover {
