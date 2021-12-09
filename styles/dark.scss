@@ -147,6 +147,7 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
     
       &:focus {
         box-shadow: none;
+        outline: none;
       }
     }
   

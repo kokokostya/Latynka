@@ -132,6 +132,7 @@
   .dark #source:focus {
     -webkit-box-shadow: none;
             box-shadow: none;
+    outline: none;
   }
   .dark #destinationContainer div .icons .icon {
     background-color: #10202c;

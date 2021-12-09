@@ -277,6 +277,7 @@ a.icon {
   #source:focus {
     -webkit-box-shadow: none;
             box-shadow: none;
+    outline: none;
   }
   #destinationContainer {
     position: relative;
