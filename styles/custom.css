@@ -26,6 +26,10 @@ table td {
   width: 20%;
 }
 
+dl {
+  margin: 0;
+}
+
 .nav-link {
   cursor: pointer;
 }

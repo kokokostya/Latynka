@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     // Populate desc
-    document.querySelector("#desc p").innerHTML = T_LITERATOR_CONFIGS[latinType]["desc"];
+    document.getElementById("desc-txt").innerHTML = T_LITERATOR_CONFIGS[latinType]["desc"];
 
     let dic = t.getConfigTransliterationInfo();
     let html = "<tr><td colspan=6></td></tr>";
@@ -231,14 +231,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
       }
       html += "</tr>";
     }
-    document.querySelector("#desc tbody").innerHTML = html;
+    document.querySelector("#desc-alphabet tbody").innerHTML = html;
 
     // Extra chars, if exist
     if (dic["_others_"]) {
-      document.querySelector("#desc dd").innerHTML = dic["_others_"];
-      document.querySelector("#desc dl").classList.remove("d-none");
+      document.querySelector("#desc-symbols dd").innerHTML = dic["_others_"];
+      document.querySelector("#desc-symbols").classList.remove("d-none");
     } else {
-      document.querySelector("#desc dl").classList.add("d-none");
+      document.querySelector("#desc-symbols").classList.add("d-none");
     }
 
     // Link
