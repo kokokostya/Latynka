@@ -1,16 +1,16 @@
-$bg: #10202c;
+$bg: #0c131b;
 
 $bg-touch-light: lighten($bg, 3%);
 $bg-touch-light: desaturate($bg-touch-light, 3%);
 
 $bg-light: lighten($bg, 7%);
-$bg-light: desaturate($bg-light, 7%);
+$bg-light: desaturate($bg-light, 4%);
 
 $bg-lighter: lighten($bg, 20%);
-$bg-lighter: desaturate($bg-lighter, 20%);
+$bg-lighter: desaturate($bg-lighter, 15%);
 
 $bg-lightest: lighten($bg, 25%);
-$bg-lightest: desaturate($bg-lightest, 25%);
+$bg-lightest: desaturate($bg-lightest, 20%);
 
 $bg-touch-darker: darken($bg, 2%);
 $bg-touch-darker: saturate($bg-touch-darker, 2%);
@@ -21,13 +21,13 @@ $bg-dark: saturate($bg-dark, 5%);
 $bg-darker: darken($bg, 8%);
 $bg-darker: saturate($bg-darker, 8%);
 
-$txt: #bcd;
+$txt: #abc;
 
 $txt-muted: lighten($bg, 25%);
-$txt-muted: desaturate($txt-muted, 25%);
+$txt-muted: desaturate($txt-muted, 20%);
 
 $txt-muted-lighter: lighten($bg, 35%);
-$txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
+$txt-muted-lighter: desaturate($txt-muted-lighter, 25%);
 
 .dark {
   background: $bg;
@@ -38,7 +38,15 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
   }
 
   .bg-light {
-    background: $bg-light !important;
+    background: $bg-touch-light !important;
+  }
+
+  .link-secondary {
+    color: $txt-muted-lighter;
+
+    &:hover {
+      color: $txt-muted;
+    }
   }
 
   .text-muted {
@@ -54,13 +62,15 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
     }
   }
 
-  .nav-pills .nav-link.active {
-    color: $txt;
-    background-color: $bg-light !important;
-  }
+  .nav-pills {
+    .nav-link.active {
+      color: $txt;
+      background-color: $bg-light !important;
+    }
 
-  .nav-pills .nav-link:hover {
-    background-color: $bg-touch-darker;
+    .nav-link:hover {
+      background-color: $bg-touch-darker;
+    }
   }
 
   .logo {
@@ -103,7 +113,7 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
     transition: box-shadow 0.2s ease;
   
     &:hover {
-      box-shadow: 0 0 10px $bg-darker;
+      box-shadow: 0 0 10px $bg-dark;
     }
   
     &:focus {
@@ -120,12 +130,12 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 35%);
       .fadeout {
         &.fadeout-left {
           left: 0;
-          background-image: linear-gradient(to right, rgba(17,34,51,1), rgba(17,34,51,0));
+          background-image: linear-gradient(to right, rgba(12,19,27,1), rgba(12,19,27,0));
         }
       
         &.fadeout-right {
           right: 0;
-          background-image: linear-gradient(to right, rgba(17,34,51,0), rgba(17,34,51,1));
+          background-image: linear-gradient(to right, rgba(12,19,27,0), rgba(12,19,27,1));
         }
       }
     }

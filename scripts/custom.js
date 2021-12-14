@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
     a.addEventListener("click", clickHandler);
     let li = document.createElement("li");
     li.className = "nav-item";
+    if (!list[key]["isEssential"]) {
+      a.classList.add("link-secondary");
+      li.classList.add("hidden");
+    }  
     li.appendChild(a);
     return li;
   }
@@ -64,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       e.preventDefault();
     });
 
-    document.getElementById("sourceTemplate").appendChild(li);
+  document.getElementById("sourceTemplate").insertBefore(li, document.querySelector("#sourceTemplate .expandable-control"));
   });
   document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
 
@@ -81,15 +85,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
       }
       e.preventDefault();
     });
-
-    if (!T_LITERATOR_CONFIGS[key]["isEssential"]) li.classList.add("hidden");    
     document.getElementById("latinType").insertBefore(li, document.querySelector("#latinType .expandable-control"));
   });
 
-  // Expand/collapse latin tabs
-  document.querySelector("#latinType .expandable-control a").addEventListener("click", function(e) {
-    document.getElementById("latinType").classList.toggle("expanded");
-    e.preventDefault();
+  // Expand/collapse tabs
+  document.querySelectorAll(".expandable-control a").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      this.closest(".expandable").classList.toggle("expanded");
+      e.preventDefault();
+    });
   });
 
   // Mark tab as active
@@ -262,8 +266,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.add("text-muted");
 
       // Reset template tabs
-      document.querySelectorAll("#sourceTemplate .nav-link").forEach((link) => (link.classList.remove("active")));
-      document.getElementById("custom").classList.add("active");
+      setActiveTab(document.getElementById("custom"));
     // If not empty
     } else {
       resetIcon.classList.remove("d-none");
@@ -344,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   });
 
   // Tab scroll behavior
-  document.querySelectorAll(".h-scroll-container").forEach( function(scrollContainer) {
+  document.querySelectorAll(".h-scroll-container").forEach(function(scrollContainer) {
     let containerWidth = scrollContainer.clientWidth;
     let lastElementPositionLeft = scrollContainer.querySelector("ul li:last-child").getBoundingClientRect().left - scrollContainer.getBoundingClientRect().left;
     let lastElementWidth = scrollContainer.querySelector("ul li:last-child").clientWidth;

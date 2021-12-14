@@ -1,40 +1,48 @@
 .dark {
-  background: #10202c;
-  color: #bcd;
+  background: #0c131b;
+  color: #abc;
 }
 
 .dark label {
-  color: #697985;
+  color: #5e6c7b;
 }
 
 .dark .bg-light {
-  background: #1d3343 !important;
+  background: #121b25 !important;
+}
+
+.dark .link-secondary {
+  color: #5e6c7b;
+}
+
+.dark .link-secondary:hover {
+  color: #445263;
 }
 
 .dark .text-muted {
-  color: #496172 !important;
+  color: #445263 !important;
 }
 
 .dark .table {
-  color: #bcd;
-  border-color: #1d3343;
+  color: #abc;
+  border-color: #182432;
 }
 
 .dark .table th {
-  color: #697985;
+  color: #5e6c7b;
 }
 
 .dark .nav-pills .nav-link.active {
-  color: #bcd;
-  background-color: #1d3343 !important;
+  color: #abc;
+  background-color: #182432 !important;
 }
 
 .dark .nav-pills .nav-link:hover {
-  background-color: #0d1b25;
+  background-color: #090e14;
 }
 
 .dark .logo {
-  background-color: #3b5467;
+  background-color: #364557;
 }
 
 .dark .logo:hover, .dark .logo:active {
@@ -50,29 +58,29 @@
 }
 
 .dark #sourceContainer .icon {
-  background-color: #1d3343;
-  -webkit-box-shadow: 0 1px 3px #08131a;
-          box-shadow: 0 1px 3px #08131a;
+  background-color: #182432;
+  -webkit-box-shadow: 0 1px 3px #04070a;
+          box-shadow: 0 1px 3px #04070a;
 }
 
 .dark #sourceContainer .icon:hover {
-  -webkit-box-shadow: 0 2px 6px #08131a;
-          box-shadow: 0 2px 6px #08131a;
+  -webkit-box-shadow: 0 2px 6px #04070a;
+          box-shadow: 0 2px 6px #04070a;
 }
 
 .dark #sourceContainer .icon:active {
-  -webkit-box-shadow: 0 2px 6px #040a0f;
-          box-shadow: 0 2px 6px #040a0f;
+  -webkit-box-shadow: 0 2px 6px black;
+          box-shadow: 0 2px 6px black;
 }
 
 .dark #source {
-  background: #3b5467;
+  background: #364557;
   border-radius: 10px;
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: #bcd;
-  -webkit-box-shadow: 0 0 6px #08131a;
-          box-shadow: 0 0 6px #08131a;
+  color: #abc;
+  -webkit-box-shadow: 0 0 6px #04070a;
+          box-shadow: 0 0 6px #04070a;
   -webkit-transition: -webkit-box-shadow 0.2s ease;
   transition: -webkit-box-shadow 0.2s ease;
   transition: box-shadow 0.2s ease;
@@ -80,8 +88,8 @@
 }
 
 .dark #source:hover {
-  -webkit-box-shadow: 0 0 10px #040a0f;
-          box-shadow: 0 0 10px #040a0f;
+  -webkit-box-shadow: 0 0 10px #04070a;
+          box-shadow: 0 0 10px #04070a;
 }
 
 .dark #source:focus {
@@ -89,31 +97,31 @@
 }
 
 .dark #source::-webkit-input-placeholder {
-  color: #697985;
+  color: #5e6c7b;
 }
 
 .dark #source:-ms-input-placeholder {
-  color: #697985;
+  color: #5e6c7b;
 }
 
 .dark #source::-ms-input-placeholder {
-  color: #697985;
+  color: #5e6c7b;
 }
 
 .dark #source::placeholder {
-  color: #697985;
+  color: #5e6c7b;
 }
 
 @media (max-width: 992px) {
   .dark .h-scroll .fadeout.fadeout-left {
     left: 0;
-    background-image: -webkit-gradient(linear, left top, right top, from(#112233), to(rgba(17, 34, 51, 0)));
-    background-image: linear-gradient(to right, #112233, rgba(17, 34, 51, 0));
+    background-image: -webkit-gradient(linear, left top, right top, from(#0c131b), to(rgba(12, 19, 27, 0)));
+    background-image: linear-gradient(to right, #0c131b, rgba(12, 19, 27, 0));
   }
   .dark .h-scroll .fadeout.fadeout-right {
     right: 0;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(17, 34, 51, 0)), to(#112233));
-    background-image: linear-gradient(to right, rgba(17, 34, 51, 0), #112233);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(12, 19, 27, 0)), to(#0c131b));
+    background-image: linear-gradient(to right, rgba(12, 19, 27, 0), #0c131b);
   }
   .dark #sourceContainer .icon {
     background-color: transparent;
@@ -135,6 +143,6 @@
     outline: none;
   }
   .dark #destinationContainer div .icons .icon {
-    background-color: #10202c;
+    background-color: #0c131b;
   }
 }
