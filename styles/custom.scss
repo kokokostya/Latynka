@@ -44,6 +44,11 @@ dl {
     display: block;
   }
 
+  .secondary {
+    color: #aab;
+    display: none;
+  }
+
   .expandable-control {
     .expand {
       display: auto;
@@ -57,6 +62,10 @@ dl {
   &.expanded {
     .hidden {
       display: block;
+    }
+
+    .secondary {
+      display: inline;
     }
 
     .expandable-control {

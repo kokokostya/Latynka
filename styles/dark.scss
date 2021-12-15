@@ -73,6 +73,12 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 25%);
     }
   }
 
+  .expandable {
+    .secondary {
+      color: $bg-lighter;
+    }
+  }
+
   .logo {
     background-color: $bg-lighter;
 

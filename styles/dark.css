@@ -41,6 +41,10 @@
   background-color: #090e14;
 }
 
+.dark .expandable .secondary {
+  color: #364557;
+}
+
 .dark .logo {
   background-color: #364557;
 }
