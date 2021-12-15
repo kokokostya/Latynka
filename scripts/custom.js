@@ -35,57 +35,61 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
   }, 300);
 
-  // Generate tab list item
-  function makeTab(list, key, clickHandler) {
-    let a = document.createElement("a");
-    a.className = "nav-link";
-    a.id = key;
-    a.innerHTML = list[key]["name"];
-    // Bind selection on click
-    a.addEventListener("click", clickHandler);
-    let li = document.createElement("li");
-    li.className = "nav-item";
-    if (!list[key]["isEssential"]) {
-      a.classList.add("link-secondary");
-      li.classList.add("hidden");
-    }  
-    li.appendChild(a);
-    return li;
+  // Render tabs
+  function renderTabs(srcList, container, clickHandler) {
+    let expandable = container.classList.contains("expandable");
+
+    Object.keys(srcList).forEach(function(key) {
+      // Make tab
+      let a = document.createElement("a");
+      a.className = "nav-link";
+      a.id = key;
+      a.innerHTML = srcList[key]["name"];
+
+      // Bind selection on click
+      a.addEventListener("click", clickHandler);
+      let li = document.createElement("li");
+      li.className = "nav-item";
+
+      if (expandable && !srcList[key]["isEssential"]) {
+        a.classList.add("link-secondary");
+        li.classList.add("hidden");
+      }
+      li.appendChild(a);
+
+      if (expandable) {
+        container.insertBefore(li, container.querySelector(".expandable-control"));
+      } else {
+        container.appendChild(li);
+      }
+    });
   }
 
   // Render source template tabs
-  Object.keys(SOURCE_TEMPLATES).forEach(function(key) {
-    let li = makeTab(SOURCE_TEMPLATES, key, function(e) {
-      if (!this.classList.contains("active")) {
-        let txt = SOURCE_TEMPLATES[this.id]["text"];
-        document.getElementById("source").value = txt;
-        if (!txt) {
-          textArea.focus();
-        }
-        setActiveTab(this);
-        inputUpdated();
+  renderTabs(SOURCE_TEMPLATES, document.getElementById("sourceTemplate"), function(e) {
+    if (!this.classList.contains("active")) {
+      let txt = SOURCE_TEMPLATES[this.id]["text"];
+      document.getElementById("source").value = txt;
+      if (!txt) {
+        textArea.focus();
       }
-      e.preventDefault();
-    });
-
-  document.getElementById("sourceTemplate").insertBefore(li, document.querySelector("#sourceTemplate .expandable-control"));
+      setActiveTab(this);
+      inputUpdated();
+    }
+    e.preventDefault();
   });
-  document.querySelector("#sourceTemplate li:first-child a").classList.add("active");
 
   // Render latin tabs
-  Object.keys(T_LITERATOR_CONFIGS).forEach(function(key) {
-    let li = makeTab(T_LITERATOR_CONFIGS, key, function(e) {
-      if (!this.classList.contains("active")) {
-        latinType = this.id;
-        t.useConfig(latinType);
-        translateInput();
-        populateLatinDesc();
-        setActiveTab(this);
-        if (textArea.value) updateURL();
-      }
-      e.preventDefault();
-    });
-    document.getElementById("latinType").insertBefore(li, document.querySelector("#latinType .expandable-control"));
+  renderTabs(T_LITERATOR_CONFIGS, document.getElementById("latinType"), function(e) {
+    if (!this.classList.contains("active")) {
+      latinType = this.id;
+      t.useConfig(latinType);
+      translateInput();
+      populateLatinDesc();
+      setActiveTab(this);
+      if (textArea.value) updateURL();
+    }
+    e.preventDefault();
   });
 
   // Expand/collapse tabs
@@ -123,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       textArea.value = SOURCE_TEMPLATES[sourceTemplate]["text"];
     } else {
       textArea.value = url.searchParams.get("s");
+      setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
     }
   } else {
     let latinTab = document.querySelector("#latinType li:first-child a");
@@ -266,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       resultText.classList.add("text-muted");
 
       // Reset template tabs
-      setActiveTab(document.getElementById("custom"));
+      setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
     // If not empty
     } else {
       resetIcon.classList.remove("d-none");
