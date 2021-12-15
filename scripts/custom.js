@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       a.className = "nav-link";
       a.id = key;
       a.innerHTML = srcList[key]["name"];
-      if (srcList[key]["year"]) a.innerHTML += " <span class='secondary'>(" + srcList[key]["year"] + ")</span>"
+      if (srcList[key]["year"]) a.innerHTML += " <sup class='secondary'>" + srcList[key]["year"] + "</sup>"
 
       // Bind selection on click
       a.addEventListener("click", clickHandler);
