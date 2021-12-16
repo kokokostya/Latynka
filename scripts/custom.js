@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
   let t = new Transliterator(new ConfigReader());
   let latinType;
+  let respectAcronyms = false;
 
   // Page title animation
   let pt = "Українська латинка";
@@ -316,6 +317,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
     inputUpdated();
     document.getElementById("source").focus();
     e.preventDefault();
+  });
+
+  // Toggle respectAcronyms
+  document.getElementById("abbr").addEventListener("click", function(e) {  
+    respectAcronyms = !respectAcronyms;
   });
 
   // Copy helper
