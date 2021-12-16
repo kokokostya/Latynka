@@ -63,18 +63,13 @@
 
 .dark #sourceContainer .icon {
   background-color: #182432;
-  -webkit-box-shadow: 0 1px 3px #04070a;
-          box-shadow: 0 1px 3px #04070a;
+  -webkit-box-shadow: 0 1px 3px #090e14;
+          box-shadow: 0 1px 3px #090e14;
 }
 
 .dark #sourceContainer .icon:hover {
-  -webkit-box-shadow: 0 2px 6px #04070a;
-          box-shadow: 0 2px 6px #04070a;
-}
-
-.dark #sourceContainer .icon:active {
-  -webkit-box-shadow: 0 2px 6px black;
-          box-shadow: 0 2px 6px black;
+  -webkit-box-shadow: 0 2px 6px #090e14;
+          box-shadow: 0 2px 6px #090e14;
 }
 
 .dark #source {

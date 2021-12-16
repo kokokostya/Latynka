@@ -1,7 +1,7 @@
 $bg: #0c131b;
 
-$bg-touch-light: lighten($bg, 3%);
-$bg-touch-light: desaturate($bg-touch-light, 3%);
+$bg-touch-lighter: lighten($bg, 3%);
+$bg-touch-lighter: desaturate($bg-touch-lighter, 3%);
 
 $bg-light: lighten($bg, 7%);
 $bg-light: desaturate($bg-light, 4%);
@@ -38,7 +38,7 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 25%);
   }
 
   .bg-light {
-    background: $bg-touch-light !important;
+    background: $bg-touch-lighter !important;
   }
 
   .link-secondary {
@@ -98,14 +98,10 @@ $txt-muted-lighter: desaturate($txt-muted-lighter, 25%);
   #sourceContainer {
     .icon {
       background-color: $bg-light;
-      box-shadow: 0 1px 3px $bg-dark;
+      box-shadow: 0 1px 3px $bg-touch-darker;
     
       &:hover {
-        box-shadow: 0 2px 6px $bg-dark;
-      }
-    
-      &:active {
-        box-shadow: 0 2px 6px $bg-darker;
+        box-shadow: 0 2px 6px $bg-touch-darker;
       }
     }
   }
