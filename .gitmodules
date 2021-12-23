@@ -1,12 +1,3 @@
 [submodule "scripts/t-literator-js"]
 	path = scripts/t-literator-js
 	url = https://github.com/shevchenkoartem/t-literator-js.git
-[submodule "scripts/--recursively"]
-	path = scripts/--recursively
-	url = https://github.com/shevchenkoartem/t-literator-js.git
-[submodule "scripts/--recursive"]
-	path = scripts/--recursive
-	url = https://github.com/shevchenkoartem/t-literator-js.git
-[submodule "scripts/configs"]
-	path = scripts/configs
-	url = https://github.com/shevchenkoartem/t-literator-configs.git
