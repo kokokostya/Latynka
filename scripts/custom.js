@@ -4,12 +4,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcons =  document.querySelector("#destinationContainer .icons");
 
-  class ConfigReader {
-    getConfigObject(cfgName) {
-      return T_LITERATOR_CONFIGS[cfgName];
-    }
-  }
-  let t = new Transliterator(new ConfigReader());
+  let t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
   let latinType;
   let respectAcronyms = false;
 
