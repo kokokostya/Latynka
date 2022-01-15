@@ -30,7 +30,7 @@ dl {
   margin: 0;
 }
 
-.nav-link {
+.link, .nav-link {
   cursor: pointer;
 }
 
@@ -229,10 +229,12 @@ a.icon {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   opacity: 1;
+  text-align: center;
+}
+
+.alert.tmp {
   -webkit-animation: fadeout 3s forwards linear;
           animation: fadeout 3s forwards linear;
-  text-align: center;
-  white-space: nowrap;
 }
 
 @-webkit-keyframes fadeout {

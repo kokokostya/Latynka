@@ -31,7 +31,7 @@ dl {
   margin: 0;
 }
 
-.nav-link {
+.link, .nav-link {
   cursor: pointer;
 }
 
@@ -227,9 +227,12 @@ a.icon {
   padding-top: .5rem;
   transform: translate(-50%, -50%);
   opacity: 1;
-  animation: fadeout 3s forwards linear;
   text-align: center;
-  white-space: nowrap;
+  // white-space: nowrap;
+
+  &.tmp {
+    animation: fadeout 3s forwards linear;
+  }
 }
 
 @keyframes fadeout {

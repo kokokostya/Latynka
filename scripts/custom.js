@@ -8,6 +8,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let latinType;
   let respectAcronyms = false;
 
+  // Render message
+  if (document.cookie.indexOf("cookies=accepted") < 0) {
+    let msg = document.createElement("div");
+    msg.classList.add("alert", "alert-secondary", "small");
+    msg.innerHTML = "Ми використовуємо кукі щоб збігати твої персональні налаштування. Залишаючись на цій сторінці, ти погоджуєшся з цим.";
+    let btn = document.createElement("a");
+    btn.classList.add("link", "mx-1");
+    btn.innerText = "Погоджуюсь";
+    btn.addEventListener("click", function(e) {
+      let date = new Date();
+      date.setTime(date.getTime() + (365*24*60*60*1000));
+      document.cookie = "cookies=accepted; expires=" + date.toUTCString() + "; path=/";
+      msg.remove();
+    });
+    msg.append(btn);
+    document.body.append(msg);
+  }
+
   // Page title animation
   let pt = "Українська латинка";
   let ptPos = 0;
@@ -333,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     // Render message
     let msg = document.createElement("div");
-    msg.classList.add("alert", "alert-success", "small");
+    msg.classList.add("alert", "alert-success", "tmp", "small");
     msg.innerHTML = subject + " скопійовано";
     document.body.append(msg);
     setTimeout(function() {
