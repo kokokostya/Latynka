@@ -8,47 +8,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let latinType;
   let respectAcronyms = false;
 
-  // Render message
-  if (document.cookie.indexOf("cookies=accepted") < 0) {
-    let msg = document.createElement("div");
-    msg.classList.add("alert", "alert-secondary", "small");
-    msg.innerHTML = "Ми використовуємо кукі щоб збігати твої персональні налаштування. Залишаючись на цій сторінці, ти погоджуєшся з цим.";
-    let btn = document.createElement("a");
-    btn.classList.add("link", "mx-1");
-    btn.innerText = "Погоджуюсь";
-    btn.addEventListener("click", function(e) {
-      let date = new Date();
-      date.setTime(date.getTime() + (365*24*60*60*1000));
-      document.cookie = "cookies=accepted; expires=" + date.toUTCString() + "; path=/";
-      msg.remove();
-    });
-    msg.append(btn);
-    document.body.append(msg);
-  }
-
-  // Page title animation
-  let pt = "Українська латинка";
-  let ptPos = 0;
-  let ptCycles = 0;
-  let ptInt = setInterval(function() {
-    if (ptCycles < 2) {
-      if (ptCycles % 2 == 0) {
-        document.title = t.transliterate(pt.substring(0, ptPos)) + pt.substring(ptPos, pt.length);
-      } else {
-        document.title = pt.substring(0, ptPos) + t.transliterate(pt.substring(ptPos, pt.length));
-      }
-  
-      if (ptPos == pt.length) {
-        ptPos = 0;
-        ptCycles++;
-      }
-      ptPos++;
-      if (pt.substring(ptPos, ptPos + 1) == " " || "а") ptPos++;
-    } else {
-      clearInterval(ptInt);
-    }
-  }, 300);
-
   // Render tabs
   function renderTabs(srcList, container, clickHandler) {
     let expandable = container.classList.contains("expandable");
@@ -126,9 +85,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
       a.closest(".nav-item").classList.add("has-active");
     }
   };
-
-  // Set theme from cookies
-  if (document.cookie.indexOf("theme=dark") >= 0) document.querySelector("body").classList.add("dark");
   
   // React to URL params
   let url = new URL(window.location.href);
@@ -409,4 +365,48 @@ document.addEventListener("DOMContentLoaded", function(e) {
     
     e.preventDefault();
   });
+
+  // Cookies message
+  if (document.cookie.indexOf("cookies=accepted") < 0) {
+    let msg = document.createElement("div");
+    msg.classList.add("alert", "alert-secondary", "small");
+    msg.innerHTML = "Ми використовуємо кукі, щоб зберігати твої персональні налаштування. Залишаючись на цій сторінці, ти погоджуєшся з цим.";
+    let btn = document.createElement("a");
+    btn.classList.add("link", "mx-1");
+    btn.innerText = "Погоджуюсь";
+    btn.addEventListener("click", function(e) {
+      let date = new Date();
+      date.setTime(date.getTime() + (365*24*60*60*1000));
+      document.cookie = "cookies=accepted; expires=" + date.toUTCString() + "; path=/";
+      msg.remove();
+    });
+    msg.append(btn);
+    document.body.append(msg);
+  }
+
+  // Set theme from cookies
+  if (document.cookie.indexOf("theme=dark") >= 0) document.querySelector("body").classList.add("dark");
+
+  // Page title animation
+  let pt = "Українська латинка";
+  let ptPos = 0;
+  let ptCycles = 0;
+  let ptInt = setInterval(function() {
+    if (ptCycles < 2) {
+      if (ptCycles % 2 == 0) {
+        document.title = t.transliterate(pt.substring(0, ptPos)) + pt.substring(ptPos, pt.length);
+      } else {
+        document.title = pt.substring(0, ptPos) + t.transliterate(pt.substring(ptPos, pt.length));
+      }
+  
+      if (ptPos == pt.length) {
+        ptPos = 0;
+        ptCycles++;
+      }
+      ptPos++;
+      if (pt.substring(ptPos, ptPos + 1) == " " || "а") ptPos++;
+    } else {
+      clearInterval(ptInt);
+    }
+  }, 300);
 });
