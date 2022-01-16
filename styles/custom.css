@@ -233,6 +233,7 @@ a.icon {
 .alert.tmp {
   -webkit-animation: fadeout 3s forwards linear;
           animation: fadeout 3s forwards linear;
+  white-space: nowrap;
 }
 
 @-webkit-keyframes fadeout {
@@ -257,6 +258,10 @@ a.icon {
   to {
     opacity: 0;
   }
+}
+
+#source, #destination, #desc {
+  font-family: sans-serif;
 }
 
 @media (max-width: 992px) {
