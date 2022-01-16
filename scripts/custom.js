@@ -379,6 +379,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       date.setTime(date.getTime() + (365*24*60*60*1000));
       document.cookie = "cookies=accepted; expires=" + date.toUTCString() + "; path=/";
       msg.remove();
+      e.preventDefault();
     });
     msg.append(btn);
     document.body.append(msg);
