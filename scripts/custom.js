@@ -4,9 +4,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
   let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   let copyIcons =  document.querySelector("#destinationContainer .icons");
 
-  let t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
+  const t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
   let latinType;
   let respectAcronyms = false;
+
+  const markdownConverter = new showdown.Converter();
 
   // Render tabs
   function renderTabs(srcList, container, clickHandler) {
@@ -57,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
   renderTabs(T_LITERATOR_CONFIGS, document.getElementById("latinType"), function(e) {
     if (!this.classList.contains("active")) {
       latinType = this.id;
-      t.useConfig(latinType);
       translateInput();
       populateLatinDesc();
       setActiveTab(this);
@@ -106,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
     setActiveTab(latinTab);
     textArea.focus();
   }
-  t.useConfig(latinType);
   inputUpdated(true);
   populateLatinDesc();
 
@@ -193,12 +193,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     // Populate desc
-    document.getElementById("desc-txt").innerHTML = T_LITERATOR_CONFIGS[latinType]["desc"];
-
-    let dic = t.getConfigTransliterationInfo();
-    let html = "<tr><td colspan=6></td></tr>";
+    document.getElementById("desc-txt").innerHTML = markdownConverter.makeHtml(T_LITERATOR_CONFIGS[latinType]["desc"]);
 
     // Populate table
+    let dic = t.getConfigTransliterationInfo();
+    let html = "<tr><td colspan=6></td></tr>";
+    
     for (let i = 1; i <= 11; i++) {
       html += "<tr>";
       for (let j = 0; j <= 2; j++) {
@@ -228,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Translate input
   function translateInput() {
+    t.useConfig(latinType);
     resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value).replaceAll("\n", "<br/>") : t.transliterate(textArea.placeholder).replaceAll("\n", "<br/>");
   }
 
