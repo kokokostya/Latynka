@@ -220,20 +220,24 @@ a.icon {
 
 .alert {
   position: fixed;
-  bottom: 0;
+  bottom: 1rem;
   margin-left: 50%;
+  margin-bottom: 0;
   padding-bottom: .5rem;
   padding-top: .5rem;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
   opacity: 1;
   text-align: center;
+  width: 90%;
+  max-width: 500px;
 }
 
 .alert.tmp {
   -webkit-animation: fadeout 3s forwards linear;
           animation: fadeout 3s forwards linear;
   white-space: nowrap;
+  width: auto;
 }
 
 @-webkit-keyframes fadeout {

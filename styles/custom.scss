@@ -220,17 +220,21 @@ a.icon {
 
 .alert {
   position: fixed;
-  bottom: 0;
+  bottom: 1rem;
   margin-left: 50%;
+  margin-bottom: 0;
   padding-bottom: .5rem;
   padding-top: .5rem;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   opacity: 1;
   text-align: center;
+  width: 90%;
+  max-width: 500px;
 
   &.tmp {
     animation: fadeout 3s forwards linear;
     white-space: nowrap;
+    width: auto;
   }
 }
 

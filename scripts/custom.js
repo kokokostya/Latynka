@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(e) {
-  let textArea = document.getElementById("source");
-  let resultText = document.getElementById("destination");
-  let resetIcon =  document.querySelector("#sourceContainer .icon-reset");
-  let copyIcons =  document.querySelector("#destinationContainer .icons");
+  const textArea = document.getElementById("source");
+  const resultText = document.getElementById("destination");
+  const resetIcon =  document.querySelector("#sourceContainer .icon-reset");
+  const copyIcons =  document.querySelector("#destinationContainer .icons");
 
   const t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
   let latinType;
@@ -355,30 +355,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Toggle theme
   document.querySelector(".theme-control").addEventListener("click", function(e) {
     document.querySelector("body").classList.toggle("dark");
-
-    let date = new Date();
-    date.setTime(date.getTime() + (365*24*60*60*1000));
     if (document.querySelector("body").classList.contains("dark")) {
-      document.cookie = "theme=dark; expires=" + date.toUTCString() + "; path=/";
+      localStorage.setItem("darkTheme", JSON.stringify(true));
     } else {
-      document.cookie = "theme=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      localStorage.removeItem("darkTheme");
     }
-    
     e.preventDefault();
   });
 
   // Cookies message
-  if (document.cookie.indexOf("cookies=accepted") < 0) {
+  if (!JSON.parse(localStorage.getItem("cookiesAccepted"))) {
     let msg = document.createElement("div");
-    msg.classList.add("alert", "alert-secondary", "small");
-    msg.innerHTML = "Ми використовуємо кукі, щоб зберігати твої персональні налаштування. Залишаючись на цій сторінці, ти погоджуєшся з цим.";
+    msg.classList.add("alert", "alert-warning", "small");
+    msg.innerHTML = "Ми використовуємо Google Analytics, що зберігає кукі. Залишаючись на цій сторінці, ти погоджуєшся з цим.";
     let btn = document.createElement("a");
     btn.classList.add("link", "mx-1");
     btn.innerText = "Погоджуюсь";
     btn.addEventListener("click", function(e) {
-      let date = new Date();
-      date.setTime(date.getTime() + (365*24*60*60*1000));
-      document.cookie = "cookies=accepted; expires=" + date.toUTCString() + "; path=/";
+      localStorage.setItem("cookiesAccepted", JSON.stringify(true));
       msg.remove();
       e.preventDefault();
     });
@@ -387,7 +381,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }
 
   // Set theme from cookies
-  if (document.cookie.indexOf("theme=dark") >= 0) document.querySelector("body").classList.add("dark");
+  if (JSON.parse(localStorage.getItem("darkTheme"))) document.querySelector("body").classList.add("dark");
 
   // Page title animation
   let pt = "Українська латинка";
