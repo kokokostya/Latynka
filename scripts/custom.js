@@ -290,9 +290,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
   });
 
   // Toggle respectAcronyms
-  document.getElementById("abbr").addEventListener("click", function(e) {  
-    respectAcronyms = !respectAcronyms;
-  });
+  // document.getElementById("abbr").addEventListener("click", function(e) {  
+  //   respectAcronyms = !respectAcronyms;
+  // });
 
   // Copy helper
   function copyStr(str, subject) {
