@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   const markdownConverter = new showdown.Converter();
 
-  // Render tabs
+  // Tabs renderer
   function renderTabs(srcList, container, clickHandler) {
     let expandable = container.classList.contains("expandable");
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
       translateInput();
       populateLatinDesc();
       setActiveTab(this);
-      if (textArea.value) updateURL();
+      updateURL();
     }
     e.preventDefault();
   });
@@ -86,36 +86,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
       a.closest(".nav-item").classList.add("has-active");
     }
   };
-  
-  // React to URL params
-  let url = new URL(window.location.href);
-  if (url.searchParams.get("l")) {
-    latinType = url.searchParams.get("l");
-    setActiveTab(document.getElementById(latinType));
-
-    let sourceTemplate = url.searchParams.get("t"); 
-    if (sourceTemplate) {
-      setActiveTab(document.getElementById(sourceTemplate));
-      textArea.value = SOURCE_TEMPLATES[sourceTemplate]["text"];
-    } else {
-      textArea.value = url.searchParams.get("s");
-      setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
-    }
-  } else {
-    let latinTab = document.querySelector("#latinType li:first-child a");
-    latinType = latinTab.id;
-    setActiveTab(latinTab);
-    textArea.focus();
-  }
-  inputUpdated(true);
-  populateLatinDesc();
 
   // Update URL
   function updateURL() {
     let params = "";
     let sourceTemplate = document.querySelector("#sourceTemplate .active").id;
+    params += "?l=" + latinType;
     if (textArea.value.length) {
-      params += "?l=" + latinType;
       if (document.querySelector("#sourceTemplate li:first-child a").classList.contains("active")) {
         params += "&s=" + textArea.value;
       } else {
@@ -383,6 +360,31 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Set theme from cookies
   if (JSON.parse(localStorage.getItem("darkTheme"))) document.querySelector("body").classList.add("dark");
 
+  // React to URL params
+  let url = new URL(window.location.href);
+  let l = url.searchParams.get("l");
+  let tab = document.getElementById(l);
+  if (tab) {
+    latinType = l;
+    setActiveTab(tab);
+
+    let sourceTemplate = url.searchParams.get("t"); 
+    if (sourceTemplate) {
+      setActiveTab(document.getElementById(sourceTemplate));
+      textArea.value = SOURCE_TEMPLATES[sourceTemplate]["text"];
+    } else {
+      textArea.value = url.searchParams.get("s");
+      setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
+    }
+  } else {
+    let latinTab = document.querySelector("#latinType li:first-child a");
+    latinType = latinTab.id;
+    setActiveTab(latinTab);
+    textArea.focus();
+  }
+  inputUpdated(true);
+  populateLatinDesc();
+  
   // Page title animation
   let pt = "Українська латинка";
   let ptPos = 0;

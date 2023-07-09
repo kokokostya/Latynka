@@ -28,6 +28,14 @@ dl {
   margin: 0;
 }
 
+.smaller {
+  font-size: 0.75em;
+}
+
+.faded {
+  color: #aaa;
+}
+
 .link, .nav-link {
   cursor: pointer;
 }
