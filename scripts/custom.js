@@ -172,7 +172,19 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     // Populate desc
-    document.getElementById("desc-txt").innerHTML = markdownConverter.makeHtml(T_LITERATOR_CONFIGS[latinType]["desc"]);
+    let desc = document.getElementById("desc-txt");
+    desc.innerHTML = markdownConverter.makeHtml(T_LITERATOR_CONFIGS[latinType]["desc"]);
+    // Setup internal links
+    desc.querySelectorAll("a").forEach(function(a) {
+      a.addEventListener("click", function(e) {
+        if (this.href.includes("/?l=")) {
+          e.preventDefault();
+          let latinTabID = this.href.split("/?l=")[1];
+          let latinTab = document.getElementById(latinTabID);
+          latinTab && latinTab.dispatchEvent(new Event("click", { "bubbles": true }));
+        }
+      });
+    });
 
     // Populate table
     let dic = t.getConfigTransliterationInfo();
