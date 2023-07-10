@@ -250,17 +250,17 @@ a.icon {
     position: relative;
     padding: 0;
   }
-  #destinationContainer div {
+  #destinationContainer > div {
     border-radius: 0;
     min-height: 8rem;
   }
-  #destinationContainer div .icons {
+  #destinationContainer > div .icons {
     float: none;
     position: absolute;
     top: -1.25rem;
     right: 1.75rem;
   }
-  #destinationContainer div .icons .icon {
+  #destinationContainer > div .icons .icon {
     background-color: #fff;
     padding: 0.75rem;
     border-radius: 2rem;
