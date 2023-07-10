@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
   const sourceCount = document.getElementById("sourceCount");
   const destinationCount = document.getElementById("destinationCount");
 
+  const charFilter = /[\s\.,;:\-—]/g;
+
   const t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
   let latinType;
   let respectAcronyms = false;
@@ -219,11 +221,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Translate input
   function translateInput() {
-    let srcCount = textArea.value.trim().replace(/[\s\.,;:-]/g, '').length;
+    let srcCount = textArea.value.trim().replace(charFilter, '').length;
 
     t.useConfig(latinType);
     let trans = (srcCount) ? t.transliterate(textArea.value) : t.transliterate(textArea.placeholder);
-    let destCount = trans.replace(/[\s\.,;:-]/g, '').length;
+    let destCount = trans.replace(charFilter, '').length;
     
     resultText.innerHTML = trans.replaceAll("\n", "<br/>");
     sourceCount.querySelector("span").innerText = srcCount;
@@ -233,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Respond to input
   function inputUpdated(skipHistory = false) {
     // If empty
-    if (!textArea.value.trim().replace(/[\s\.,;:-]/g, '').length) {
+    if (!textArea.value.trim().replace(charFilter, '').length) {
       textArea.value = "";
       textArea.style.height = "0px";
       resetIcon.classList.add("d-none");
