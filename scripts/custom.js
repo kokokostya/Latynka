@@ -207,11 +207,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Translate input
   function translateInput() {
-    let srcCount = textArea.value.trim().length;
+    let srcCount = textArea.value.trim().replace(/[\s\.,;:-]/g, '').length;
 
     t.useConfig(latinType);
     let trans = (srcCount) ? t.transliterate(textArea.value) : t.transliterate(textArea.placeholder);
-    let destCount = trans.replace(/\s+/g, '').length;
+    let destCount = trans.replace(/[\s\.,;:-]/g, '').length;
     
     resultText.innerHTML = trans.replaceAll("\n", "<br/>");
     sourceCount.querySelector("span").innerText = srcCount;
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   // Respond to input
   function inputUpdated(skipHistory = false) {
     // If empty
-    if (!textArea.value.trim().length) {
+    if (!textArea.value.trim().replace(/[\s\.,;:-]/g, '').length) {
       textArea.value = "";
       textArea.style.height = "0px";
       resetIcon.classList.add("d-none");
