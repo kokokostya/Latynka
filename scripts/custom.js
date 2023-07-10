@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
   const resultText = document.getElementById("destination");
   const resetIcon =  document.querySelector("#sourceContainer .icon-reset");
   const copyIcons =  document.querySelector("#destinationContainer .icons");
+  const sourceCount = document.getElementById("sourceCount");
+  const destinationCount = document.getElementById("destinationCount");
 
   const t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
   let latinType;
@@ -205,8 +207,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Translate input
   function translateInput() {
+    let srcCount = textArea.value.trim().length;
+
     t.useConfig(latinType);
-    resultText.innerHTML = (textArea.value.trim().length) ? t.transliterate(textArea.value).replaceAll("\n", "<br/>") : t.transliterate(textArea.placeholder).replaceAll("\n", "<br/>");
+    let trans = (srcCount) ? t.transliterate(textArea.value) : t.transliterate(textArea.placeholder);
+    let destCount = trans.replace(/\s+/g, '').length;
+    
+    resultText.innerHTML = trans.replaceAll("\n", "<br/>");
+    sourceCount.querySelector("span").innerText = srcCount;
+    destinationCount.querySelector("span").innerText = destCount;
   }
 
   // Respond to input
@@ -221,11 +230,16 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
       // Reset template tabs
       setActiveTab(document.querySelector("#sourceTemplate li:first-child a"));
+
+      sourceCount.classList.add("d-none");
+      destinationCount.classList.add("d-none");
     // If not empty
     } else {
       resetIcon.classList.remove("d-none");
       copyIcons.classList.remove("d-none");
       resultText.classList.remove("text-muted");
+      sourceCount.classList.remove("d-none");
+      destinationCount.classList.remove("d-none");
     }
 
     // Textarea auto font size
