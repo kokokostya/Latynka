@@ -28,6 +28,11 @@ dl {
   margin: 0;
 }
 
+a[href^="/?l"] {
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+
 .smaller {
   font-size: 0.75em;
 }
