@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   const t = new Transliterator(Object.values(T_LITERATOR_CONFIGS));
   let latinType;
-  let respectAcronyms = false;
+  // let respectAcronyms = false;
 
   const markdownConverter = new showdown.Converter();
 
@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
 
     setActiveTab(document.getElementById(latinType));
-    populateLatinDesc();
     inputUpdated(true);
+    populateLatinDesc();
   });
 
   // Populate selected latin description
