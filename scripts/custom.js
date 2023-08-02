@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
   // Copy text
   document.querySelector("#destinationContainer .icon-copy").addEventListener("click", function(e) {
-    copyStr(resultText.innerHTML, "Текст");
+    copyStr(resultText.innerHTML.replaceAll("<br>", "\n"), "Текст");
     e.preventDefault();
   });
 
