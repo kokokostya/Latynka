@@ -19,6 +19,7 @@ h2 {
 
 table th {
   width: 10%;
+  min-width: 2.5rem;
 }
 table td {
   width: 20%;
